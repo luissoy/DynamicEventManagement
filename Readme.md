@@ -103,7 +103,7 @@ The app is a Spring Boot application that provides CRUD operations for managing 
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| pageable | query |  | Yes | [Pageable](#Pageable) |
+| pageable | query |  | Yes | Pageable |
 
 #### POST
 
@@ -114,7 +114,7 @@ The app is a Spring Boot application that provides CRUD operations for managing 
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| pageable | query |  | Yes | [Pageable](#Pageable) |
+| pageable | query |  | Yes | Pageable |
 
 #### POST
 
@@ -125,7 +125,7 @@ The app is a Spring Boot application that provides CRUD operations for managing 
 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
-| pageable | query |  | Yes | [Pageable](#Pageable) |
+| pageable | query |  | Yes | Pageable |
 
 #### POST
 
@@ -146,7 +146,7 @@ The app is a Spring Boot application that provides CRUD operations for managing 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | appId | path |  | Yes | string |
-| pageable | query |  | Yes | [Pageable](#Pageable) |
+| pageable | query |  | Yes | Pageable |
 
 ### /api/v1/groups/users/{userId}
 
@@ -156,7 +156,7 @@ The app is a Spring Boot application that provides CRUD operations for managing 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | userId | path |  | Yes | string |
-| pageable | query |  | Yes | [Pageable](#Pageable) |
+| pageable | query |  | Yes | Pageable |
 
 ### /api/v1/groups/apps/{appId}
 
@@ -166,7 +166,7 @@ The app is a Spring Boot application that provides CRUD operations for managing 
 | Name | Located in | Description | Required | Schema |
 | ---- | ---------- | ----------- | -------- | ---- |
 | appId | path |  | Yes | string |
-| pageable | query |  | Yes | [Pageable](#Pageable) |
+| pageable | query |  | Yes | Pageable |
 
 ### /api/v1/apps/names/{name}
 
