@@ -1,5 +1,6 @@
 package com.dynamiceventmanagement.databaselayer.dto;
 
+import com.dynamiceventmanagement.databaselayer.model.Group;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +13,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GroupDto {
-    private Long app_id;
+    private String appId;
 
     private String name;
 
-    private List<Long> users;
+    private List<String> userIds;
+
+    public GroupDto(Group group) {
+        this.appId = group.getAppId();
+        this.name = group.getName();
+        this.userIds = group.getUserIds();
+    }
 }

@@ -1,5 +1,6 @@
 package com.dynamiceventmanagement.databaselayer.dto;
 
+import com.dynamiceventmanagement.databaselayer.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,5 +15,10 @@ import java.util.Map;
 public class UserDto {
     private String username;
 
-    private Map<Long, Map<String, String>> parameters;
+    private Map<String, Map<String, String>> appParameters;
+
+    public UserDto(User user) {
+        this.username = user.getUsername();
+        this.appParameters = user.getAppParameters();
+    }
 }
