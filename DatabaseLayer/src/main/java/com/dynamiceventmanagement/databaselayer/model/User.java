@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Map;
 
@@ -17,15 +19,22 @@ import java.util.Map;
 @Document(collection = "users")
 public class User {
     @Id
-    private Long id;
+    private String id;
 
+    @Indexed(unique = true)
     private String username;
 
-    private Map<Long, Map<String, String>> parameters;
+    @Field("apps_parameters")
+    private Map<String, Map<String, String>> appParameters;
 
-    public User(Long id, UserDto userDto) {
+    public User(UserDto userDto) {
+        this.username = userDto.getUsername();
+        this.appParameters = userDto.getAppParameters();
+    }
+
+    public User(String id, UserDto userDto) {
         this.id = id;
         this.username = userDto.getUsername();
-        this.parameters = userDto.getParameters();
+        this.appParameters = userDto.getAppParameters();
     }
 }

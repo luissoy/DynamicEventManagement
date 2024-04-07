@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -15,11 +16,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "apps")
 public class App {
     @Id
-    private Long id;
+    private String id;
 
+    @Indexed(unique = true)
     private String name;
 
-    public App(Long id, AppDto appDto) {
+    public App(AppDto appDto) {
+        this.name = appDto.getName();
+    }
+
+    public App(String id, AppDto appDto) {
         this.id = id;
         this.name = appDto.getName();
     }
