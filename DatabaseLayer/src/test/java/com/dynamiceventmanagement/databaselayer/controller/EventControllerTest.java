@@ -67,7 +67,7 @@ public class EventControllerTest {
     }
 
     @Test
-    void testGetAllByEventId() throws DataNotFoundException {
+    void testGetAllByEventId() {
         // Given
         Pageable pageable = Pageable.unpaged();
         String groupId = "groupId";

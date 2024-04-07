@@ -67,7 +67,7 @@ public class NotificationControllerTest {
     }
 
     @Test
-    void testGetAllByEventId() throws DataNotFoundException {
+    void testGetAllByEventId() {
         // Given
         Pageable pageable = Pageable.unpaged();
         String eventId = "eventId";
