@@ -1,0 +1,17 @@
+package com.dynamiceventmanagement.databaselayer.dto;
+
+import com.dynamiceventmanagement.databaselayer.model.Group;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class EventDto {
+    private String groupId;
+    private Group groupInfo;
+    private String userId;
+}
