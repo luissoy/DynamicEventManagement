@@ -2,7 +2,35 @@
   "tasks": [
     {
       "id": 1,
-      "name": "Database layer: First version of the database model and its CRUD."
+      "name": "Database layer: Database Models, Dtos and Repositories"
+    },
+    {
+      "id": 2,
+      "name": "Database layer: Docker setup"
+    },
+    {
+      "id": 3,
+      "name": "Database layer: Service tests"
+    },
+    {
+      "id": 4,
+      "name": "Database layer: Controller tests"
+    },
+    {
+      "id": 5,
+      "name": "Database layer: Integration tests"
+    },
+    {
+      "id": 6,
+      "name": "Database layer: Services"
+    },
+    {
+      "id": 7,
+      "name": "Database layer: Controllers"
+    },
+    {
+      "id": 8,
+      "name": "Database layer: Swagger Documentation"
     }
   ]
 }
