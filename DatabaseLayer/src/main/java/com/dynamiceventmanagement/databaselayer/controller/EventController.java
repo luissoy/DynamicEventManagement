@@ -1,10 +1,8 @@
 package com.dynamiceventmanagement.databaselayer.controller;
 
-import com.dynamiceventmanagement.databaselayer.dto.AppDto;
 import com.dynamiceventmanagement.databaselayer.dto.EventDto;
 import com.dynamiceventmanagement.databaselayer.exception.DataIntegrityException;
 import com.dynamiceventmanagement.databaselayer.exception.DataNotFoundException;
-import com.dynamiceventmanagement.databaselayer.model.Event;
 import com.dynamiceventmanagement.databaselayer.service.EventService;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
