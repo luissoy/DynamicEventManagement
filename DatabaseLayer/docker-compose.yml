@@ -1,0 +1,54 @@
+version: "3"
+services:
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: luis
+      MONGO_INITDB_ROOT_PASSWORD: luissoy
+    ports:
+      - "27017:27017"
+    networks:
+      - internal
+
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    container_name: mongo-express
+    ports:
+      - "10000:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_BASICAUTH_USERNAME: luis
+      ME_CONFIG_BASICAUTH_PASSWORD: luissoy
+      ME_CONFIG_MONGODB_ADMINUSERNAME: luis
+      ME_CONFIG_MONGODB_ADMINPASSWORD: luissoy
+    depends_on:
+      - mongo
+    networks:
+      - internal
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: database-api
+    ports:
+      - "10001:8080"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: dynamic_event_management
+      SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE: admin
+      SPRING_DATA_MONGODB_USERNAME: luis
+      SPRING_DATA_MONGODB_PASSWORD: luissoy
+    depends_on:
+      - mongo
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
