@@ -37,7 +37,7 @@ class DatabaseLayerApplicationTests {
         Optional<App> savedUserOptional = appRepository.findById(id);
         assertTrue(savedUserOptional.isPresent());
         assertEquals(app.getId(), savedUserOptional.get().getId());
-        assertEquals(app.getName(), savedUserOptional.get().getName());
+        assertEquals(app.getNotificationUrl(), savedUserOptional.get().getNotificationUrl());
 
         appRepository.deleteById(id);
     }

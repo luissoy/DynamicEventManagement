@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface AppRepository extends MongoRepository<App, String> {
-    Optional<App> findByName(String name);
+    Optional<App> findByNotificationUrl(String name);
 }

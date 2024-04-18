@@ -21,4 +21,6 @@ public interface GroupRepository extends MongoRepository<Group, String> {
 
     @Query("{'user_ids': { $in: [ ?0, '$user_ids' ] }}")
     Page<Group> findGroupsByUserId(String userId, Pageable pageable);
+
+    boolean existsByName(String name);
 }

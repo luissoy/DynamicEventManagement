@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Setter
@@ -18,15 +18,15 @@ public class App {
     @Id
     private String id;
 
-    @Indexed(unique = true)
-    private String name;
+    @Field("notification_url")
+    private String notificationUrl;
 
     public App(AppDto appDto) {
-        this.name = appDto.getName();
+        this.notificationUrl = appDto.getNotificationUrl();
     }
 
     public App(String id, AppDto appDto) {
         this.id = id;
-        this.name = appDto.getName();
+        this.notificationUrl = appDto.getNotificationUrl();
     }
 }
