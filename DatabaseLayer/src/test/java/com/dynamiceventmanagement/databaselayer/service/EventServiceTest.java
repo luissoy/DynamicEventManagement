@@ -45,7 +45,7 @@ public class EventServiceTest {
     void testGetAll_NotEmpty() {
         // Given
         Pageable pageable = Pageable.unpaged();
-        Event event = new Event("1", "GroupId", null, "UserId");
+        Event event = new Event("1", "GroupId", "UserId", null);
         List<Event> eventList = List.of(event);
         Page<Event> expectedPage = new PageImpl<>(eventList, pageable, eventList.size());
 
@@ -77,7 +77,7 @@ public class EventServiceTest {
     void testGetOne_WhenEventExists() throws DataNotFoundException {
         // Given
         String eventId = "1";
-        Event expectedEvent = new Event(eventId, "GroupId", null, "UserId");
+        Event expectedEvent = new Event(eventId, "GroupId", "UserId", null);
 
         // When
         when(eventRepository.findById(eventId)).thenReturn(Optional.of(expectedEvent));
@@ -106,7 +106,7 @@ public class EventServiceTest {
         // Given
         Pageable pageable = Pageable.unpaged();
         String groupId = "groupId";
-        Event event = new Event("eventId", groupId, null, "UserId");
+        Event event = new Event("eventId", groupId, "UserId", null);
         List<Event> eventList = List.of(event);
         Page<Event> expectedPage = new PageImpl<>(eventList, pageable, eventList.size());
 
@@ -139,7 +139,7 @@ public class EventServiceTest {
     @Test
     void testSave_WithValidDto() throws DataIntegrityException {
         // Given
-        EventDto validDto = new EventDto("groupId", null, "userId");
+        EventDto validDto = new EventDto("groupId", "userId", null);
 
         // When
         when(eventRepository.save(any(Event.class))).thenAnswer(invocation -> invocation.getArgument(0));
