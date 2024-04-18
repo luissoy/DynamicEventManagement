@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class EventService {
     @Autowired
@@ -23,7 +25,10 @@ public class EventService {
 
     public Event getOne(String id) throws DataNotFoundException {
         return ServiceExceptionsUtil.
-                getObjectOrDataNotFound(eventRepository.findById(id));
+                getObjectOrDataNotFound(
+                        eventRepository.findById(id),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.event")
+                );
     }
 
     public PageResponse<Event> getAllByGroupId(String groupId, Pageable pageable) {
@@ -38,6 +43,10 @@ public class EventService {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getUserId(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.event.user-id.empty"));
+
+        if (dto.getDateTime() == null) {
+            dto.setDateTime(LocalDateTime.now());
+        }
 
         return eventRepository.save(new Event(dto));
     }
