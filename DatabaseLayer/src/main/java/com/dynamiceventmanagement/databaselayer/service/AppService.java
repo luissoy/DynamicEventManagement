@@ -32,29 +32,38 @@ public class AppService {
 
     public App getOne(String id) throws DataNotFoundException {
         return ServiceExceptionsUtil.
-                getObjectOrDataNotFound(appRepository.findById(id));
+                getObjectOrDataNotFound(
+                        appRepository.findById(id),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.app")
+                );
     }
 
-    public App getByName(String name) throws DataNotFoundException {
+    public App getByNotificationUrl(String notificationUrl) throws DataNotFoundException {
         return ServiceExceptionsUtil.
-                getObjectOrDataNotFound(appRepository.findByName(name));
+                getObjectOrDataNotFound(
+                        appRepository.findByNotificationUrl(notificationUrl),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.app.notification-url")
+                );
     }
 
     public App save(AppDto dto) throws DataIntegrityException {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getName(),
+                dto.getNotificationUrl(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.app.name.empty"));
 
         return appRepository.save(new App(dto));
     }
 
     public App update(String id, AppDto dto) throws DataNotFoundException, DataIntegrityException {
-        App oldApp = ServiceExceptionsUtil.
-                getObjectOrDataNotFound(appRepository.findById(id));
+        App oldApp =  ServiceExceptionsUtil.
+                getObjectOrDataNotFound(
+                        appRepository.findById(id),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.app")
+                );
 
         App app = new App(id,
                 new AppDto(
-                        dto.getName() == null ? oldApp.getName() : dto.getName()
+                        dto.getNotificationUrl() == null ? oldApp.getNotificationUrl() : dto.getNotificationUrl()
                 ));
 
         return appRepository.save(app);
