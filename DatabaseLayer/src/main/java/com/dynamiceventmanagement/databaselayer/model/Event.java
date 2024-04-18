@@ -9,6 +9,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,22 +23,22 @@ public class Event {
     @Field("group_id")
     private String groupId;
 
-    @Field("group_info")
-    private Group groupInfo;
-
     @Field("user_id")
     private String userId;
 
+    @Field("date_time")
+    private LocalDateTime dateTime;
+
     public Event(EventDto eventDto) {
         this.groupId = eventDto.getGroupId();
-        this.groupInfo = eventDto.getGroupInfo();
         this.userId = eventDto.getUserId();
+        this.dateTime = eventDto.getDateTime();
     }
 
     public Event(String id, EventDto eventDto) {
         this.id = id;
         this.groupId = eventDto.getGroupId();
-        this.groupInfo = eventDto.getGroupInfo();
         this.userId = eventDto.getUserId();
+        this.dateTime = eventDto.getDateTime();
     }
 }
