@@ -30,12 +30,18 @@ public class UserService {
 
     public User getOne(String id) throws DataNotFoundException {
         return ServiceExceptionsUtil.
-                getObjectOrDataNotFound(userRepository.findById(id));
+                getObjectOrDataNotFound(
+                        userRepository.findById(id),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.user")
+                );
     }
 
     public User getByUsername(String username) throws DataNotFoundException {
         return ServiceExceptionsUtil.
-                getObjectOrDataNotFound(userRepository.findByUsername(username));
+                getObjectOrDataNotFound(
+                        userRepository.findByUsername(username),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.user.username")
+                );
     }
 
     public PageResponse<User> getByAppId(String appId, Pageable pageable) {
@@ -51,12 +57,25 @@ public class UserService {
                 dto.getUsername(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.user.username.empty"));
 
+        ServiceExceptionsUtil.noExistsOrDataIntegrity(
+                userRepository.existsByUsername(dto.getUsername()),
+                CustomPropertiesBean.getProperty("exception.data.integrity.user.username.exists")
+        );
+
         return userRepository.save(new User(dto));
     }
 
     public User update(String id, UserDto dto) throws DataNotFoundException, DataIntegrityException {
         User oldUser = ServiceExceptionsUtil.
-                getObjectOrDataNotFound(userRepository.findById(id));
+                getObjectOrDataNotFound(
+                        userRepository.findById(id),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.user")
+                );
+
+        ServiceExceptionsUtil.noExistsOrDataIntegrity(
+                userRepository.existsByUsername(dto.getUsername()),
+                CustomPropertiesBean.getProperty("exception.data.integrity.user.username.exists")
+        );
 
         User user = new User(id,
                 new UserDto(
