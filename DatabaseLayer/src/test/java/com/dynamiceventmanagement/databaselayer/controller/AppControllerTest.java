@@ -75,10 +75,10 @@ class AppControllerTest {
         App app = new App("1", name);
 
         // When
-        when(appService.getByName(name)).thenReturn(app);
+        when(appService.getByNotificationUrl(name)).thenReturn(app);
 
         // Then
-        ResponseEntity<?> responseEntity = appController.getByName(name);
+        ResponseEntity<?> responseEntity = appController.getByNotificationUrl(name);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(app, responseEntity.getBody());
