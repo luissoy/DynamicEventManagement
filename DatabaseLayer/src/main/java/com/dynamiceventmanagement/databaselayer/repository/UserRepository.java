@@ -19,4 +19,6 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     @Query(value = "{'apps_parameters.?0': { $exists: true }}")
     Page<User> findUsersWithByAppId(String appId, Pageable pageable);
+
+    boolean existsByUsername(String username);
 }
