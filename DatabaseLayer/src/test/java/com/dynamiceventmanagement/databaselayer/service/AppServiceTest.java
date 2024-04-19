@@ -116,10 +116,10 @@ public class AppServiceTest {
         App expectedApp = new App("1", appName);
 
         // When
-        when(appRepository.findByName(appName)).thenReturn(Optional.of(expectedApp));
+        when(appRepository.findByNotificationUrl(appName)).thenReturn(Optional.of(expectedApp));
 
         // Then
-        App resultApp = appService.getByName(appName);
+        App resultApp = appService.getByNotificationUrl(appName);
         assertEquals(expectedApp, resultApp);
     }
 
@@ -129,11 +129,11 @@ public class AppServiceTest {
         String appName = "App Name";
 
         // When
-        when(appRepository.findByName(appName)).thenReturn(Optional.empty());
+        when(appRepository.findByNotificationUrl(appName)).thenReturn(Optional.empty());
 
         // Then
         assertThrows(DataNotFoundException.class, () -> {
-            appService.getByName(appName);
+            appService.getByNotificationUrl(appName);
         });
     }
 
@@ -148,7 +148,7 @@ public class AppServiceTest {
         // Then
         App savedApp = appService.save(validDto);
         assertNotNull(savedApp);
-        assertEquals(validDto.getName(), savedApp.getName());
+        assertEquals(validDto.getNotificationUrl(), savedApp.getNotificationUrl());
     }
 
     @Test
@@ -178,7 +178,7 @@ public class AppServiceTest {
         // Then
         App updatedApp = appService.update(id, dto);
         assertEquals(id, updatedApp.getId());
-        assertEquals(dto.getName(), updatedApp.getName());
+        assertEquals(dto.getNotificationUrl(), updatedApp.getNotificationUrl());
     }
 
     @Test

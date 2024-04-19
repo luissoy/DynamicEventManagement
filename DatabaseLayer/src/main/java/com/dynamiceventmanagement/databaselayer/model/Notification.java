@@ -21,20 +21,29 @@ public class Notification {
     @Field("event_id")
     private String eventId;
 
-    @Field("user_id")
-    private String userId;
+    private User user;
 
-    @Field("notification_info")
-    private String notificationInfo;
+    @Field("user_to_notify")
+    private User userToNotify;
+
+    private Group group;
+
+    private Object message;
 
     public Notification(NotificationDto eventDto) {
         this.eventId = eventDto.getEventId();
-        this.notificationInfo = eventDto.getNotificationInfo();
+        this.user = eventDto.getUser();
+        this.userToNotify = eventDto.getUserToNotify();
+        this.group = eventDto.getGroup();
+        this.message = eventDto.getMessage();
     }
 
     public Notification(String id, NotificationDto eventDto) {
         this.id = id;
         this.eventId = eventDto.getEventId();
-        this.notificationInfo = eventDto.getNotificationInfo();
+        this.user = eventDto.getUser();
+        this.userToNotify = eventDto.getUserToNotify();
+        this.group = eventDto.getGroup();
+        this.message = eventDto.getMessage();
     }
 }

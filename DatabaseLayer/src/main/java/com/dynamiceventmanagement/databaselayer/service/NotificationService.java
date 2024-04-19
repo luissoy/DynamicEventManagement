@@ -23,7 +23,10 @@ public class NotificationService {
 
     public Notification getOne(String id) throws DataNotFoundException {
         return ServiceExceptionsUtil.
-                getObjectOrDataNotFound(notificationRepository.findById(id));
+                getObjectOrDataNotFound(
+                        notificationRepository.findById(id),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.notification")
+                );
     }
 
     public PageResponse<Notification> getAllByEventId(String eventId, Pageable pageable) {
@@ -34,6 +37,14 @@ public class NotificationService {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getEventId(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.notification.event-id.empty"));
+
+        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
+                dto.getUser().getId(),
+                CustomPropertiesBean.getProperty("exception.data.integrity.notification.user-id.empty"));
+
+        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
+                dto.getUserToNotify().getId(),
+                CustomPropertiesBean.getProperty("exception.data.integrity.notification.user-id-to-notify.empty"));
 
         return notificationRepository.save(new Notification(dto));
     }

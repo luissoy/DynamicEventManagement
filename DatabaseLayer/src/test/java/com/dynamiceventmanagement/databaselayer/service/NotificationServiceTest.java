@@ -5,6 +5,7 @@ import com.dynamiceventmanagement.databaselayer.dto.NotificationDto;
 import com.dynamiceventmanagement.databaselayer.exception.DataIntegrityException;
 import com.dynamiceventmanagement.databaselayer.exception.DataNotFoundException;
 import com.dynamiceventmanagement.databaselayer.model.Notification;
+import com.dynamiceventmanagement.databaselayer.model.User;
 import com.dynamiceventmanagement.databaselayer.repository.NotificationRepository;
 import com.dynamiceventmanagement.databaselayer.response.PageResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +46,8 @@ public class NotificationServiceTest {
     void testGetAll_NotEmpty() {
         // Given
         Pageable pageable = Pageable.unpaged();
-        Notification notification = new Notification("1", "eventId", null, null);
+        Notification notification = new Notification("1",
+                "eventId", null, null, null, null);
         List<Notification> notificationList = List.of(notification);
         Page<Notification> expectedPage = new PageImpl<>(notificationList, pageable, notificationList.size());
 
@@ -77,7 +79,8 @@ public class NotificationServiceTest {
     void testGetOne_WhenNotificationExists() throws DataNotFoundException {
         // Given
         String notificationId = "1";
-        Notification expectedNotification = new Notification(notificationId, "EventId", null, null);
+        Notification expectedNotification = new Notification(notificationId,
+                "EventId", null, null, null, null);
 
         // When
         when(notificationRepository.findById(notificationId)).thenReturn(Optional.of(expectedNotification));
@@ -106,7 +109,8 @@ public class NotificationServiceTest {
         // Given
         Pageable pageable = Pageable.unpaged();
         String eventId = "eventId";
-        Notification notification = new Notification("1", eventId, null, null);
+        Notification notification = new Notification("1",
+                eventId, null, null, null, null);
         List<Notification> notificationList = List.of(notification);
         Page<Notification> expectedPage = new PageImpl<>(notificationList, pageable, notificationList.size());
 
@@ -139,7 +143,13 @@ public class NotificationServiceTest {
     @Test
     void testSave_WithValidDto() throws DataIntegrityException {
         // Given
-        NotificationDto validDto = new NotificationDto("EventId", null, null);
+        User user = new User("1", "username", null);
+        NotificationDto validDto = new NotificationDto(
+                "EventId",
+                user,
+                user,
+                null,
+                null);
 
         // When
         when(notificationRepository.save(any(Notification.class))).thenAnswer(invocation -> invocation.getArgument(0));

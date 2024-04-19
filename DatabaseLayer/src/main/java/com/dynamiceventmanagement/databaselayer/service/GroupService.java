@@ -26,7 +26,10 @@ public class GroupService {
 
     public Group getOne(String id) throws DataNotFoundException {
         return ServiceExceptionsUtil.
-                getObjectOrDataNotFound(groupRepository.findById(id));
+                getObjectOrDataNotFound(
+                        groupRepository.findById(id),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.group")
+                );
     }
 
     public PageResponse<Group> getByAppId(String appId, Pageable pageable) {
@@ -58,12 +61,25 @@ public class GroupService {
                 dto.getUserIds(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.group.user-ids.empty"));
 
+        ServiceExceptionsUtil.noExistsOrDataIntegrity(
+                groupRepository.existsByName(dto.getName()),
+                CustomPropertiesBean.getProperty("exception.data.integrity.group.name.exists")
+        );
+
         return groupRepository.save(new Group(dto));
     }
 
     public Group update(String id, GroupDto dto) throws DataNotFoundException, DataIntegrityException {
         Group oldGroup = ServiceExceptionsUtil.
-                getObjectOrDataNotFound(groupRepository.findById(id));
+                getObjectOrDataNotFound(
+                        groupRepository.findById(id),
+                        CustomPropertiesBean.getProperty("exception.data.not-found.group")
+                );
+
+        ServiceExceptionsUtil.noExistsOrDataIntegrity(
+                groupRepository.existsByName(dto.getName()),
+                CustomPropertiesBean.getProperty("exception.data.integrity.group.name.exists")
+        );
 
         Group group = new Group(id,
                 new GroupDto(

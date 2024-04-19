@@ -35,11 +35,11 @@ public class AppController {
     }
 
     @GetMapping("names/{name}")
-    public ResponseEntity<?> getByName(
+    public ResponseEntity<?> getByNotificationUrl(
             @PathVariable("name") String name)
             throws DataNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).
-                body(appService.getByName(name));
+                body(appService.getByNotificationUrl(name));
     }
 
     @PostMapping

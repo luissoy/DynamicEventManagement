@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class ServiceExceptionsUtil {
-    public static <T> T getObjectOrDataNotFound(Optional<T> optionalEntity) throws DataNotFoundException {
+    public static <T> T getObjectOrDataNotFound(
+            Optional<T> optionalEntity,
+            String errorMessage)
+            throws DataNotFoundException {
         if (optionalEntity.isEmpty()) {
-            throw new DataNotFoundException();
+            throw new DataNotFoundException(errorMessage);
         }
         return optionalEntity.get();
     }
@@ -29,6 +32,12 @@ public class ServiceExceptionsUtil {
     public static void existsOrDataNotFound(boolean exists) throws DataNotFoundException {
         if (!exists) {
             throw new DataNotFoundException();
+        }
+    }
+
+    public static void noExistsOrDataIntegrity(boolean exists, String errorMessage) throws DataIntegrityException {
+        if (exists) {
+            throw new DataIntegrityException(errorMessage);
         }
     }
 

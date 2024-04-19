@@ -34,7 +34,7 @@ public class EventControllerTest {
     void testGetAll() {
         // Given
         Pageable pageable = Pageable.unpaged();
-        Event event = new Event("1", "GroupId", null, "UserId");
+        Event event = new Event("1", "GroupId", "UserId", null);
         List<Event> eventList = List.of(event);
         Page<Event> page = new PageImpl<>(eventList, pageable, eventList.size());
 
@@ -54,7 +54,7 @@ public class EventControllerTest {
     void testGetOne() throws DataNotFoundException {
         // Given
         String id = "1";
-        Event event = new Event(id, "GroupId", null, "UserId");
+        Event event = new Event(id, "GroupId", "UserId", null);
 
         // When
         when(eventService.getOne(id)).thenReturn(event);
@@ -71,7 +71,7 @@ public class EventControllerTest {
         // Given
         Pageable pageable = Pageable.unpaged();
         String groupId = "groupId";
-        Event event = new Event("1", groupId, null, "UserId");
+        Event event = new Event("1", groupId, "UserId", null);
         List<Event> eventList = List.of(event);
         Page<Event> page = new PageImpl<>(eventList, pageable, eventList.size());
 
@@ -92,7 +92,7 @@ public class EventControllerTest {
     @Test
     void testSave() throws DataIntegrityException {
         // Given
-        EventDto eventDto = new EventDto("groupId",null, "UserId");
+        EventDto eventDto = new EventDto("groupId", "UserId", null);
         Event event = new Event("1", eventDto);
 
         // When
