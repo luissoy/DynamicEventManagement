@@ -31,6 +31,58 @@
     {
       "id": 8,
       "name": "Database layer: Documentation"
+    },
+    {
+      "id": 9,
+      "name": "Database layer: Small updates after release"
+    },
+    {
+      "id": 10,
+      "name": "Application layer - Notification App: Models and Dtos"
+    },
+    {
+      "id": 11,
+      "name": "Application layer - Notification App: Services for external connections"
+    },
+    {
+      "id": 12,
+      "name": "Application layer - Notification App: Services"
+    },
+    {
+      "id": 13,
+      "name": "Application layer - Notification App: Controllers"
+    },
+    {
+      "id": 14,
+      "name": "Application layer - Notification App: Properties"
+    },
+    {
+      "id": 15,
+      "name": "Application layer - Notification App: Docker setup"
+    },
+    {
+      "id": 16,
+      "name": "Database layer: Improve the tests"
+    },
+    {
+      "id": 17,
+      "name": "External apps layer - Custom app: Docker setup"
+    },
+    {
+      "id": 18,
+      "name": "External apps layer - Custom app: Models"
+    },
+    {
+      "id": 19,
+      "name": "External apps layer - Custom app: Services for external connections (Email)"
+    },
+    {
+      "id": 20,
+      "name": "External apps layer - Custom app: Services"
+    },
+    {
+      "id": 21,
+      "name": "External apps layer - Custom app: Controllers"
     }
   ]
 }
