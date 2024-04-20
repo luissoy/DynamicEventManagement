@@ -8,10 +8,11 @@ services:
     ports:
       - "10002:8080"
     environment:
-      API_BASE_URL: http://database-api:8080
+      API_DATABASE_URL: http://database-app:8080/api/v1/
     networks:
-      - internal
+      - tfg-network
 
 networks:
-  internal:
-    driver: bridge
+  tfg-network:
+    external:
+      name: tfg-network
