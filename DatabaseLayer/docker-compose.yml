@@ -10,8 +10,10 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: luissoy
     ports:
       - "27017:27017"
+    volumes:
+      - ./data:/data/db
     networks:
-      - internal
+      - tfg-network
 
   mongo-express:
     image: mongo-express:latest
@@ -28,13 +30,13 @@ services:
     depends_on:
       - mongo
     networks:
-      - internal
+      - tfg-network
 
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: database-api
+    container_name: database-app
     ports:
       - "10001:8080"
     environment:
@@ -47,8 +49,9 @@ services:
     depends_on:
       - mongo
     networks:
-      - internal
+      - tfg-network
 
 networks:
-  internal:
+  tfg-network:
     driver: bridge
+    name: tfg-network
