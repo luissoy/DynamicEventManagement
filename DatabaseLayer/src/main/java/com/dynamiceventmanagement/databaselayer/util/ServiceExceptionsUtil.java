@@ -29,9 +29,9 @@ public class ServiceExceptionsUtil {
         }
     }
 
-    public static void existsOrDataNotFound(boolean exists) throws DataNotFoundException {
+    public static void existsOrDataNotFound(boolean exists, String errorMessage) throws DataNotFoundException {
         if (!exists) {
-            throw new DataNotFoundException();
+            throw new DataNotFoundException(errorMessage);
         }
     }
 
