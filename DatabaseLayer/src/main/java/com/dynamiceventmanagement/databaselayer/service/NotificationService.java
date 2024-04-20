@@ -34,6 +34,12 @@ public class NotificationService {
     }
 
     public Notification save(NotificationDto dto) throws DataIntegrityException {
+        validateDtoDataIntegrity(dto);
+
+        return notificationRepository.save(new Notification(dto));
+    }
+
+    private void validateDtoDataIntegrity(NotificationDto dto) throws DataIntegrityException {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getEventId(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.notification.event-id.empty"));
@@ -45,7 +51,5 @@ public class NotificationService {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getUserToNotify().getId(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.notification.user-id-to-notify.empty"));
-
-        return notificationRepository.save(new Notification(dto));
     }
 }
