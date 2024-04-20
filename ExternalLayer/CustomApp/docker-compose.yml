@@ -15,7 +15,7 @@ services:
     depends_on:
       - smtp4dev
     networks:
-      - internal
+      - tfg-network
 
   smtp4dev:
     image: rnwood/smtp4dev
@@ -29,8 +29,9 @@ services:
     environment:
       - ServerOptions__HostName=smtp4dev
     networks:
-      - internal
+      - tfg-network
 
 networks:
-  internal:
-    driver: bridge
+  tfg-network:
+    external:
+      name: tfg-network
