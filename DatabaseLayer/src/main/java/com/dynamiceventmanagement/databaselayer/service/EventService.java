@@ -36,6 +36,16 @@ public class EventService {
     }
 
     public Event save(EventDto dto) throws DataIntegrityException {
+        validateDtoDataIntegrity(dto);
+
+        if (dto.getDateTime() == null) {
+            dto.setDateTime(LocalDateTime.now());
+        }
+
+        return eventRepository.save(new Event(dto));
+    }
+
+    private void validateDtoDataIntegrity(EventDto dto) throws DataIntegrityException {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getGroupId(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.event.group-id.empty"));
@@ -43,11 +53,5 @@ public class EventService {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getUserId(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.event.user-id.empty"));
-
-        if (dto.getDateTime() == null) {
-            dto.setDateTime(LocalDateTime.now());
-        }
-
-        return eventRepository.save(new Event(dto));
     }
 }

@@ -53,6 +53,36 @@ public class UserService {
     }
 
     public User save(UserDto dto) throws DataIntegrityException {
+        validateDtoDataIntegrity(dto);
+
+        return userRepository.save(new User(dto));
+    }
+
+    public User update(String id, UserDto dto) throws DataNotFoundException, DataIntegrityException {
+        User old = getOne(id);
+
+        validateDtoDataIntegrity(dto, old);
+
+        User user = new User(
+                id,
+                dto
+        );
+
+        return userRepository.save(user);
+    }
+
+    public void delete(String id) throws DataNotFoundException, DataIntegrityException {
+        ServiceExceptionsUtil.existsOrDataNotFound(
+                userRepository.existsById(id),
+                CustomPropertiesBean.getProperty("exception.data.not-found.user")
+        );
+
+        groupDataDeletionBean.deleteUserFromGroupsByUserId(id);
+
+        userRepository.deleteById(id);
+    }
+
+    private void validateDtoDataIntegrity(UserDto dto) throws DataIntegrityException {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getUsername(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.user.username.empty"));
@@ -61,37 +91,19 @@ public class UserService {
                 userRepository.existsByUsername(dto.getUsername()),
                 CustomPropertiesBean.getProperty("exception.data.integrity.user.username.exists")
         );
-
-        return userRepository.save(new User(dto));
     }
 
-    public User update(String id, UserDto dto) throws DataNotFoundException, DataIntegrityException {
-        User oldUser = ServiceExceptionsUtil.
-                getObjectOrDataNotFound(
-                        userRepository.findById(id),
-                        CustomPropertiesBean.getProperty("exception.data.not-found.user")
-                );
+    private void validateDtoDataIntegrity(UserDto dto, User old) throws DataIntegrityException {
+        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
+                dto.getUsername(),
+                CustomPropertiesBean.getProperty("exception.data.integrity.user.username.empty"));
 
-        ServiceExceptionsUtil.noExistsOrDataIntegrity(
-                userRepository.existsByUsername(dto.getUsername()),
-                CustomPropertiesBean.getProperty("exception.data.integrity.user.username.exists")
-        );
-
-        User user = new User(id,
-                new UserDto(
-                        dto.getUsername() == null ? oldUser.getUsername() : dto.getUsername(),
-                        dto.getAppParameters() == null ? oldUser.getAppParameters() : dto.getAppParameters()
-                ));
-
-        return userRepository.save(user);
-    }
-
-    public void delete(String id) throws DataNotFoundException, DataIntegrityException {
-        ServiceExceptionsUtil.existsOrDataNotFound(userRepository.existsById(id));
-
-        groupDataDeletionBean.deleteUserFromGroupsByUserId(id);
-
-        userRepository.deleteById(id);
+        if (!dto.getUsername().equals(old.getUsername())) {
+            ServiceExceptionsUtil.noExistsOrDataIntegrity(
+                    userRepository.existsByUsername(dto.getUsername()),
+                    CustomPropertiesBean.getProperty("exception.data.integrity.user.username.exists")
+            );
+        }
     }
 
 }
