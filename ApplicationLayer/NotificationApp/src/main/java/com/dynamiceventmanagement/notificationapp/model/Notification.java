@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class Notification {
 
     private User user;
 
-    private User userToNotify;
+    private List<User> usersToNotify;
 
     private Group group;
 
@@ -26,7 +28,7 @@ public class Notification {
     public Notification(NotificationDto eventDto) {
         this.eventId = eventDto.getEventId();
         this.user = eventDto.getUser();
-        this.userToNotify = eventDto.getUserToNotify();
+        this.usersToNotify = eventDto.getUsersToNotify();
         this.group = eventDto.getGroup();
         this.message = eventDto.getMessage();
     }
@@ -35,7 +37,7 @@ public class Notification {
         this.id = id;
         this.eventId = eventDto.getEventId();
         this.user = eventDto.getUser();
-        this.userToNotify = eventDto.getUserToNotify();
+        this.usersToNotify = eventDto.getUsersToNotify();
         this.group = eventDto.getGroup();
         this.message = eventDto.getMessage();
     }
