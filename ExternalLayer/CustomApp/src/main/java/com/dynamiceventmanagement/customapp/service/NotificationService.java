@@ -1,5 +1,6 @@
 package com.dynamiceventmanagement.customapp.service;
 
+import com.dynamiceventmanagement.customapp.exception.ExternalDataIntegrityException;
 import com.dynamiceventmanagement.customapp.model.Notification;
 import com.dynamiceventmanagement.customapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +11,19 @@ public class NotificationService {
 
     @Autowired
     private EmailApiService emailApiService;
-    public void save (Notification notification) {
+    public void save (Notification notification) throws ExternalDataIntegrityException {
+        validateDataIntegrity(notification);
+
         String appId = notification.getGroup().getAppId();
+        User userToNotify = notification.getUsersToNotify().get(0);
 
         String to = getEmail(
-                notification.getUserToNotify(),
+                userToNotify,
                 appId
         );
 
         String subject = getSubject(
-                notification.getUserToNotify(),
+                userToNotify,
                 notification.getGroup().getName(),
                 appId
         );
@@ -48,5 +52,11 @@ public class NotificationService {
                 user.getUsername() +
                 "\n\n" +
                 message.toString();
+    }
+
+    private void validateDataIntegrity (Notification notification) throws ExternalDataIntegrityException {
+        if (notification.getUsersToNotify().size() != 1) {
+            throw new ExternalDataIntegrityException();
+        }
     }
 }
