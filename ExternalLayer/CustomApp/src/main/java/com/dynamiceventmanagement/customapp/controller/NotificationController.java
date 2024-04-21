@@ -1,5 +1,6 @@
 package com.dynamiceventmanagement.customapp.controller;
 
+import com.dynamiceventmanagement.customapp.exception.ExternalDataIntegrityException;
 import com.dynamiceventmanagement.customapp.model.Notification;
 import com.dynamiceventmanagement.customapp.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class NotificationController {
     @Async
     @PostMapping
     public void save(
-            @RequestBody Notification notification
-    ) {
+            @RequestBody Notification notification)
+            throws ExternalDataIntegrityException {
         notificationService.save(notification);
     }
 }
