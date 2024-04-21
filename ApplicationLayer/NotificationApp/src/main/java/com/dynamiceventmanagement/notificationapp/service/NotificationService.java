@@ -8,6 +8,7 @@ import com.dynamiceventmanagement.notificationapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class NotificationService {
             NotificationDto notificationDto = new NotificationDto(
                     eventId,
                     user,
-                    getUserCustomApp(userIdToNotify, appId),
+                    getUserListCustomApp(userIdToNotify, appId),
                     group,
                     message
             );
@@ -47,6 +48,24 @@ public class NotificationService {
             externalLayerApplicationsApiService.sendNotification(notification, appId);
         }
 
+    }
+
+    private List<User> getUserListCustomApp (String userId, String appId) throws DatabaseApiException {
+        User user = getUserCustomApp(userId, appId);
+
+        return List.of(user);
+    }
+
+    private List<User> getUserListCustomApp (List<String> userIds, String appId) throws DatabaseApiException {
+        List<User> users = new ArrayList<>();
+
+        for (String userId : userIds) {
+            User user = getUserCustomApp(userId, appId);
+
+            users.add(user);
+        }
+
+        return users;
     }
 
     private User getUserCustomApp (String userId, String appId) throws DatabaseApiException {
