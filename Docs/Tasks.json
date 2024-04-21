@@ -91,6 +91,18 @@
     {
       "id": 23,
       "name": "Database layer: Improve put calls"
+    },
+    {
+      "id": 24,
+      "name": "All layers: Changes to notification to provide a list of users to notify"
+    },
+    {
+      "id": 25,
+      "name": "All layers: Changes to application to include field to specify whether to notify one by one or all group users"
+    },
+    {
+      "id": 26,
+      "name": "Application layer - Notification App: Add the option to notify one by one or all group users depending on the app"
     }
   ]
 }
