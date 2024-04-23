@@ -248,6 +248,24 @@ public class UserServiceTest {
     }
 
     @Test
+    void testUpdate_WithExistingIdAndDifferentUsername() throws DataNotFoundException, DataIntegrityException {
+        // Given
+        String id = "1";
+        UserDto dto = new UserDto("Username", null);
+        Optional<User> user = Optional.of(new User(id, dto));
+        user.get().setUsername("oldUsername");
+
+        // When
+        when(userRepository.findById(id)).thenReturn(user);
+        when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Then
+        User updatedUser = userService.update(id, dto);
+        assertEquals(id, updatedUser.getId());
+        assertEquals(dto.getUsername(), updatedUser.getUsername());
+    }
+
+    @Test
     void testUpdate_WithNonExistingId() {
         // Given
         String id = "1";

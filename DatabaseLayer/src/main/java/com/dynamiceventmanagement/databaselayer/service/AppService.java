@@ -81,7 +81,7 @@ public class AppService {
     private void validateDtoDataIntegrity(AppDto dto) throws DataIntegrityException {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getNotificationUrl(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.app.name.empty")
+                CustomPropertiesBean.getProperty("exception.data.integrity.app.notification-url.empty")
         );
     }
 
