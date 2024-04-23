@@ -15,15 +15,17 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @PostMapping("/{userId}/{groupId}")
+    @PostMapping("/{userId}/{groupId}/{appId}")
     public ResponseEntity<?> save(
             @Parameter(example = "606d1b91df256d34e0a44a35") @PathVariable("userId")
             String userId,
             @Parameter(example = "606d1b91df256d34e0a44a35") @PathVariable("groupId")
             String groupId,
+            @Parameter(example = "606d1b91df256d34e0a44a35") @PathVariable("appId")
+            String appId,
             @RequestBody Object message)
             throws DatabaseApiException {
         return ResponseEntity.status(HttpStatus.CREATED).
-                body(eventService.save(userId, groupId, message));
+                body(eventService.save(userId, groupId, appId, message));
     }
 }
