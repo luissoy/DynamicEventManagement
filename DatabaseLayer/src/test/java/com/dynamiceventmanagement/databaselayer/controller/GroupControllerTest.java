@@ -36,7 +36,7 @@ public class GroupControllerTest {
     void testGetAll() {
         // Given
         Pageable pageable = Pageable.unpaged();
-        Group group = new Group("GroupId", "AppId", "Group Name", null);
+        Group group = new Group("GroupId", "Group Name", null);
         List<Group> groupList = List.of(group);
         Page<Group> page = new PageImpl<>(groupList, pageable, groupList.size());
 
@@ -56,7 +56,7 @@ public class GroupControllerTest {
     void testGetOne() throws DataNotFoundException {
         // Given
         String id = "1";
-        Group group = new Group(id, "AppId", "Group Name", null);
+        Group group = new Group(id, "Group Name", null);
 
         // When
         when(groupService.getOne(id)).thenReturn(group);
@@ -72,18 +72,18 @@ public class GroupControllerTest {
     void testGetByAppId() {
         // Given
         Pageable pageable = Pageable.unpaged();
-        String appId = "AppId";
-        Group group = new Group("GroupId", appId, "Group Name", null);
+        String name = "Group Name";
+        Group group = new Group("GroupId", name, null);
         List<Group> groupList = List.of(group);
         Page<Group> page = new PageImpl<>(groupList, pageable, groupList.size());
 
         PageResponse<Group> pageResponse = new PageResponse<>(page);
 
         // When
-        when(groupService.getByAppId(appId, pageable)).thenReturn(pageResponse);
+        when(groupService.getByName(name, pageable)).thenReturn(pageResponse);
 
         // Then
-        ResponseEntity<?> responseEntity = groupController.getByAppId(appId, pageable);
+        ResponseEntity<?> responseEntity = groupController.getByName(name, pageable);
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(pageResponse, responseEntity.getBody());
@@ -96,7 +96,7 @@ public class GroupControllerTest {
         String userId = "UserId";
         List<String> userIds = List.of(userId);
 
-        Group group = new Group("GroupId", "AppId", "Group Name", userIds);
+        Group group = new Group("GroupId", "Group Name", userIds);
         List<Group> groupList = List.of(group);
         Page<Group> page = new PageImpl<>(groupList, pageable, groupList.size());
 
@@ -115,7 +115,7 @@ public class GroupControllerTest {
     @Test
     void testSave() throws DataIntegrityException {
         // Given
-        GroupDto groupDto = new GroupDto("AppId", "Name", null);
+        GroupDto groupDto = new GroupDto("Name", null);
         Group group = new Group("1", groupDto);
 
         // When
@@ -133,7 +133,7 @@ public class GroupControllerTest {
         // Given
         String id = "1";
 
-        GroupDto groupDto = new GroupDto("AppId", "Name", null);
+        GroupDto groupDto = new GroupDto("Name", null);
         Group group = new Group(id, groupDto);
 
         // When
