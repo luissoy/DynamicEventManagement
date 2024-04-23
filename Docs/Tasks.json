@@ -66,27 +66,27 @@
     },
     {
       "id": 17,
-      "name": "External apps layer - Custom app: Docker setup"
+      "name": "External layer - Custom app: Docker setup"
     },
     {
       "id": 18,
-      "name": "External apps layer - Custom app: Models"
+      "name": "External layer - Custom app: Models"
     },
     {
       "id": 19,
-      "name": "External apps layer - Custom app: Services for external connections (Email)"
+      "name": "External layer - Custom app: Services for external connections (Email)"
     },
     {
       "id": 20,
-      "name": "External apps layer - Custom app: Services"
+      "name": "External layer - Custom app: Services"
     },
     {
       "id": 21,
-      "name": "External apps layer - Custom app: Controllers"
+      "name": "External layer - Custom app: Controllers"
     },
     {
       "id": 22,
-      "name": "External apps layer - Custom app: Properties"
+      "name": "External layer - Custom app: Properties"
     },
     {
       "id": 23,
@@ -98,7 +98,7 @@
     },
     {
       "id": 25,
-      "name": ""
+      "name": "External layer - Generic Frontend: Frontend that send an event with a string message"
     }
   ]
 }
