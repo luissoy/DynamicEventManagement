@@ -34,12 +34,12 @@ public class GroupController {
                 body(groupService.getOne(id));
     }
 
-    @GetMapping("apps/{appId}")
-    public ResponseEntity<?> getByAppId(
-            @PathVariable("appId") String appId,
+    @GetMapping("names/{name}")
+    public ResponseEntity<?> getByName(
+            @PathVariable("name") String name,
             Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).
-                body(groupService.getByAppId(appId, pageable));
+                body(groupService.getByName(name, pageable));
     }
 
     @GetMapping("users/{userId}")

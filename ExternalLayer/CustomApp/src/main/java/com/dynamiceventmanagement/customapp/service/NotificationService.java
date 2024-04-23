@@ -11,7 +11,8 @@ public class NotificationService {
     @Autowired
     private EmailApiService emailApiService;
     public void save (Notification notification) {
-        String appId = notification.getGroup().getAppId();
+        //String appId = notification.getAppId();
+        String appId = ".";
 
         String to = getEmail(
                 notification.getUserToNotify(),

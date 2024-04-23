@@ -14,8 +14,6 @@ import java.util.List;
 public class Group {
     private String id;
 
-    private String appId;
-
     private String name;
 
     private List<String> userIds;

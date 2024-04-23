@@ -14,7 +14,7 @@ public class EventService {
     @Autowired
     private NotificationService notificationService;
 
-    public Event save(String userId, String groupId, Object message) throws DatabaseApiException {
+    public Event save(String userId, String groupId, String appId, Object message) throws DatabaseApiException {
         EventDto eventDto = new EventDto(
                 groupId,
                 userId,
@@ -23,7 +23,7 @@ public class EventService {
 
         Event event = eventApiService.save(eventDto);
 
-        notificationService.sendNotifications(event.getId(), userId, groupId, message);
+        notificationService.sendNotifications(event.getId(), userId, groupId, appId, message);
 
         return event;
     }

@@ -32,12 +32,8 @@ public class GroupService {
                 );
     }
 
-    public PageResponse<Group> getByAppId(String appId, Pageable pageable) {
-        return new PageResponse<>(groupRepository.findByAppId(appId, pageable));
-    }
-
-    public List<Group> getByAppId(String appId) {
-        return groupRepository.findByAppId(appId);
+    public PageResponse<Group> getByName(String name, Pageable pageable) {
+        return new PageResponse<>(groupRepository.findByName(name, pageable));
     }
 
     public PageResponse<Group> getByUserId(String userId, Pageable pageable) {
@@ -57,7 +53,7 @@ public class GroupService {
     public Group update(String id, GroupDto dto) throws DataNotFoundException, DataIntegrityException {
         Group old = getOne(id);
 
-        validateDtoDataIntegrity(dto, old);
+        validateDtoDataIntegrity(dto);
 
         Group group = new Group(
                 id,
@@ -78,11 +74,6 @@ public class GroupService {
 
     private void validateDtoDataIntegrity(GroupDto dto) throws DataIntegrityException {
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getAppId(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.app-id.empty")
-        );
-
-        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getName(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.group.name.empty")
         );
@@ -91,35 +82,6 @@ public class GroupService {
                 dto.getUserIds(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.group.user-ids.empty")
         );
-
-        ServiceExceptionsUtil.noExistsOrDataIntegrity(
-                groupRepository.existsByName(dto.getName()),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.name.exists")
-        );
-    }
-
-    private void validateDtoDataIntegrity(GroupDto dto, Group old) throws DataIntegrityException {
-        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getAppId(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.app-id.empty")
-        );
-
-        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getName(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.name.empty")
-        );
-
-        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getUserIds(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.user-ids.empty")
-        );
-
-        if (!dto.getName().equals(old.getName())) {
-            ServiceExceptionsUtil.noExistsOrDataIntegrity(
-                    groupRepository.existsByName(dto.getName()),
-                    CustomPropertiesBean.getProperty("exception.data.integrity.group.name.exists")
-            );
-        }
     }
 
 }

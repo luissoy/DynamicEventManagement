@@ -16,13 +16,6 @@ public class GroupDataDeletionBean {
     @Autowired
     private GroupService groupService;
 
-    public void deleteGroupsByAppId(String appId) throws DataNotFoundException {
-        List<Group> groups = groupService.getByAppId(appId);
-        for (Group group : groups) {
-            groupService.delete(group.getId());
-        }
-    }
-
     public void deleteUserFromGroupsByUserId(String userId) throws DataNotFoundException, DataIntegrityException {
         List<Group> groups = groupService.getByUserId(userId);
         for (Group group : groups) {

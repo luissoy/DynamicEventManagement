@@ -15,21 +15,17 @@ import java.util.List;
 public class Group {
     private String id;
 
-    private String appId;
-
     private String name;
 
     private List<String> userIds;
 
     public Group(GroupDto groupsDto) {
-        this.appId = groupsDto.getAppId();
         this.name = groupsDto.getName();
         this.userIds = groupsDto.getUserIds();
     }
 
     public Group(String id, GroupDto groupsDto) {
         this.id = id;
-        this.appId = groupsDto.getAppId();
         this.name = groupsDto.getName();
         this.userIds = groupsDto.getUserIds();
     }
