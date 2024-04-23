@@ -13,14 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GroupDto {
-    private String appId;
 
     private String name;
 
     private List<String> userIds;
 
     public GroupDto(Group group) {
-        this.appId = group.getAppId();
         this.name = group.getName();
         this.userIds = group.getUserIds();
     }
