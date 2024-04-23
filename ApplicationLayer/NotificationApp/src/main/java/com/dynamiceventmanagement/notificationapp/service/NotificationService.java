@@ -27,10 +27,9 @@ public class NotificationService {
     @Autowired
     private ExternalLayerApplicationsApiService externalLayerApplicationsApiService;
 
-    public void sendNotifications(String eventId, String userId, String groupId, Object message) throws DatabaseApiException {
+    public void sendNotifications(String eventId, String userId, String groupId, String appId, Object message) throws DatabaseApiException {
         Group group = groupApiService.getOne(groupId);
         List<String> userIds = group.getUserIds();
-        String appId = group.getAppId();
         User user = getUserCustomApp(userId, appId);
 
         for (String userIdToNotify : userIds) {
