@@ -21,9 +21,6 @@ public class AppService {
     private AppRepository appRepository;
 
     @Autowired
-    private GroupDataDeletionBean groupDataDeletionBean;
-
-    @Autowired
     private UserDataDeletionBean userDataDeletionBean;
 
     public PageResponse<App> getAll(Pageable pageable) {
@@ -70,8 +67,6 @@ public class AppService {
                 appRepository.existsById(id),
                 CustomPropertiesBean.getProperty("exception.data.not-found.app")
         );
-
-        groupDataDeletionBean.deleteGroupsByAppId(id);
 
         userDataDeletionBean.deleteAppParametersFromUsersByAppId(id);
 
