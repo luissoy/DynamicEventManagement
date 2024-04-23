@@ -314,6 +314,26 @@ public class GroupServiceTest {
     }
 
     @Test
+    void testUpdate_WithExistingIdAndDifferentName() throws DataNotFoundException, DataIntegrityException {
+        // Given
+        String id = "1";
+        String userId = "1";
+        List<String> userIds = List.of(userId);
+        GroupDto dto = new GroupDto("Appid","GroupName", userIds);
+        Optional<Group> group = Optional.of(new Group(id, dto));
+        group.get().setName("OldName");
+
+        // When
+        when(groupRepository.findById(id)).thenReturn(group);
+        when(groupRepository.save(any(Group.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        // Then
+        Group updatedGroup = groupService.update(id, dto);
+        assertEquals(id, updatedGroup.getId());
+        assertEquals(dto.getName(), updatedGroup.getName());
+    }
+
+    @Test
     void testUpdate_WithNonExistingId() {
         // Given
         String id = "1";
