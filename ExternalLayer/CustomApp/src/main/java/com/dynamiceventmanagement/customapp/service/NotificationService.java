@@ -11,16 +11,16 @@ public class NotificationService {
     @Autowired
     private EmailApiService emailApiService;
     public void save (Notification notification) {
-        //String appId = notification.getAppId();
-        String appId = ".";
+        String appId = notification.getAppId();
+        User userToNotify = notification.getUserToNotify();
 
         String to = getEmail(
-                notification.getUserToNotify(),
+                userToNotify,
                 appId
         );
 
         String subject = getSubject(
-                notification.getUserToNotify(),
+                userToNotify,
                 notification.getGroup().getName(),
                 appId
         );

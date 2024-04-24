@@ -45,6 +45,10 @@ public class NotificationService {
                 CustomPropertiesBean.getProperty("exception.data.integrity.notification.event-id.empty"));
 
         ServiceExceptionsUtil.notEmptyOrDataIntegrity(
+                dto.getAppId(),
+                CustomPropertiesBean.getProperty("exception.data.integrity.notification.app-id.empty"));
+
+        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
                 dto.getUser().getId(),
                 CustomPropertiesBean.getProperty("exception.data.integrity.notification.user-id.empty"));
 
