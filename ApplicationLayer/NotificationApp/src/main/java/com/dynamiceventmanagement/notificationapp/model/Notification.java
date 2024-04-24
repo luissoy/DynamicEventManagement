@@ -15,6 +15,8 @@ public class Notification {
 
     private String eventId;
 
+    private String appId;
+
     private User user;
 
     private User userToNotify;
@@ -25,6 +27,7 @@ public class Notification {
 
     public Notification(NotificationDto eventDto) {
         this.eventId = eventDto.getEventId();
+        this.appId = eventDto.getAppId();
         this.user = eventDto.getUser();
         this.userToNotify = eventDto.getUserToNotify();
         this.group = eventDto.getGroup();
@@ -34,6 +37,7 @@ public class Notification {
     public Notification(String id, NotificationDto eventDto) {
         this.id = id;
         this.eventId = eventDto.getEventId();
+        this.appId = eventDto.getAppId();
         this.user = eventDto.getUser();
         this.userToNotify = eventDto.getUserToNotify();
         this.group = eventDto.getGroup();

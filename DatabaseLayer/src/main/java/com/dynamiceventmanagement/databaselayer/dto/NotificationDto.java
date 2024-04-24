@@ -14,6 +14,8 @@ import lombok.Setter;
 public class NotificationDto {
     private String eventId;
 
+    private String appId;
+
     private User user;
 
     private User userToNotify;
