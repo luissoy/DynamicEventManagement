@@ -1,3 +1,5 @@
+var host = 'http://localhost:10002/api/v1/events/';
+
 function sendEvent() {
     //var userId = document.getElementById("userIdInput").value;
     //var groupId = document.getElementById("groupIdInput").value;
@@ -7,8 +9,12 @@ function sendEvent() {
 
     var userId = "6623d6d2bbc2974d7aec466c";
     var groupId = "6623d70cbbc2974d7aec466e";
+    var appId = "6623d6adbbc2974d7aec466b";
 
-    var url = 'http://localhost:10002/api/v1/events/' + userId + "/" + groupId;
+    var url = host +
+        userId + "/" +
+        groupId + "/" +
+        appId;
 
     fetch(url, {
         method: 'POST',
