@@ -103,6 +103,10 @@
     {
       "id": 26,
       "name": "All layers: Update the group object so that it does not contain the appId"
+    },
+    {
+      "id": 27,
+      "name": "All layers: Update the notification object so that it contains the appId"
     }
   ]
 }
