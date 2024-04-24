@@ -21,6 +21,9 @@ public class Notification {
     @Field("event_id")
     private String eventId;
 
+    @Field("app_id")
+    private String appId;
+
     private User user;
 
     @Field("user_to_notify")
@@ -32,6 +35,7 @@ public class Notification {
 
     public Notification(NotificationDto eventDto) {
         this.eventId = eventDto.getEventId();
+        this.appId = eventDto.getAppId();
         this.user = eventDto.getUser();
         this.userToNotify = eventDto.getUserToNotify();
         this.group = eventDto.getGroup();
@@ -41,6 +45,7 @@ public class Notification {
     public Notification(String id, NotificationDto eventDto) {
         this.id = id;
         this.eventId = eventDto.getEventId();
+        this.appId = eventDto.getAppId();
         this.user = eventDto.getUser();
         this.userToNotify = eventDto.getUserToNotify();
         this.group = eventDto.getGroup();

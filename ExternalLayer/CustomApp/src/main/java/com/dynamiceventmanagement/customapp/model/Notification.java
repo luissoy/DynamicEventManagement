@@ -14,6 +14,8 @@ public class Notification {
 
     private String eventId;
 
+    private String appId;
+
     private User user;
 
     private User userToNotify;
@@ -21,5 +23,4 @@ public class Notification {
     private Group group;
 
     private Object message;
-
 }
