@@ -35,7 +35,7 @@ public class NotificationControllerTest {
         // Given
         Pageable pageable = Pageable.unpaged();
         Notification notification = new Notification("1",
-                "EventId", null, null, null, null);
+                "EventId", "appId", null, null, null, null);
         List<Notification> notificationList = List.of(notification);
         Page<Notification> page = new PageImpl<>(notificationList, pageable, notificationList.size());
 
@@ -56,7 +56,7 @@ public class NotificationControllerTest {
         // Given
         String id = "1";
         Notification notification = new Notification(id,
-                "EventId", null, null, null, null);
+                "EventId", "appId", null, null, null, null);
 
         // When
         when(notificationService.getOne(id)).thenReturn(notification);
@@ -74,7 +74,7 @@ public class NotificationControllerTest {
         Pageable pageable = Pageable.unpaged();
         String eventId = "eventId";
         Notification notification = new Notification("1",
-                eventId, null, null, null, null);
+                eventId, "appId", null, null, null, null);
         List<Notification> notificationList = List.of(notification);
         Page<Notification> page = new PageImpl<>(notificationList, pageable, notificationList.size());
 
@@ -95,7 +95,7 @@ public class NotificationControllerTest {
     @Test
     void testSave() throws DataIntegrityException {
         // Given
-        NotificationDto notificationDto = new NotificationDto("eventId",
+        NotificationDto notificationDto = new NotificationDto("eventId", "appId",
                 null, null, null, null);
         Notification notification = new Notification("1", notificationDto);
 
