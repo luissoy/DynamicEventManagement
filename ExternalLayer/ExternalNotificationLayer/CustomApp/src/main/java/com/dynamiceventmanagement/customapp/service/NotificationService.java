@@ -11,15 +11,16 @@ public class NotificationService {
     @Autowired
     private EmailApiService emailApiService;
     public void save (Notification notification) {
-        String appId = notification.getGroup().getAppId();
+        String appId = notification.getAppId();
+        User userToNotify = notification.getUserToNotify();
 
         String to = getEmail(
-                notification.getUserToNotify(),
+                userToNotify,
                 appId
         );
 
         String subject = getSubject(
-                notification.getUserToNotify(),
+                userToNotify,
                 notification.getGroup().getName(),
                 appId
         );
@@ -39,14 +40,15 @@ public class NotificationService {
     private String getSubject(User user, String groupName, String appId) {
         String subject = user.getAppParameters().get(appId).get("subject_title");
         return subject == null ?
-                "New Notification: " + groupName :
-                subject + ": " + groupName;
+                "New Emergency from group " + groupName :
+                subject + ": New Emergency from group " + groupName;
     }
 
     private String getText(User user, Object message) {
-        return "This is a notification from " +
+        return "This is a emergency notification from " +
                 user.getUsername() +
                 "\n\n" +
+                "The message is: " +
                 message.toString();
     }
 }

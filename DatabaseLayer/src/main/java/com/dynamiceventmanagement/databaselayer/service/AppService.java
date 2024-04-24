@@ -21,9 +21,6 @@ public class AppService {
     private AppRepository appRepository;
 
     @Autowired
-    private GroupDataDeletionBean groupDataDeletionBean;
-
-    @Autowired
     private UserDataDeletionBean userDataDeletionBean;
 
     public PageResponse<App> getAll(Pageable pageable) {
@@ -47,36 +44,40 @@ public class AppService {
     }
 
     public App save(AppDto dto) throws DataIntegrityException {
-        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getNotificationUrl(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.app.name.empty"));
+        validateDtoDataIntegrity(dto);
 
         return appRepository.save(new App(dto));
     }
 
     public App update(String id, AppDto dto) throws DataNotFoundException, DataIntegrityException {
-        App oldApp =  ServiceExceptionsUtil.
-                getObjectOrDataNotFound(
-                        appRepository.findById(id),
-                        CustomPropertiesBean.getProperty("exception.data.not-found.app")
-                );
+        App oldApp = getOne(id);
 
-        App app = new App(id,
-                new AppDto(
-                        dto.getNotificationUrl() == null ? oldApp.getNotificationUrl() : dto.getNotificationUrl()
-                ));
+        validateDtoDataIntegrity(dto);
+
+        App app = new App(
+                id,
+                dto
+        );
 
         return appRepository.save(app);
     }
 
     public void delete(String id) throws DataNotFoundException, DataIntegrityException {
-        ServiceExceptionsUtil.existsOrDataNotFound(appRepository.existsById(id));
-
-        groupDataDeletionBean.deleteGroupsByAppId(id);
+        ServiceExceptionsUtil.existsOrDataNotFound(
+                appRepository.existsById(id),
+                CustomPropertiesBean.getProperty("exception.data.not-found.app")
+        );
 
         userDataDeletionBean.deleteAppParametersFromUsersByAppId(id);
 
         appRepository.deleteById(id);
+    }
+
+    private void validateDtoDataIntegrity(AppDto dto) throws DataIntegrityException {
+        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
+                dto.getNotificationUrl(),
+                CustomPropertiesBean.getProperty("exception.data.integrity.app.notification-url.empty")
+        );
     }
 
 }

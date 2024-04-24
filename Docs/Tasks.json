@@ -66,23 +66,51 @@
     },
     {
       "id": 17,
-      "name": "External apps layer - Custom app: Docker setup"
+      "name": "External layer - Custom app: Docker setup"
     },
     {
       "id": 18,
-      "name": "External apps layer - Custom app: Models"
+      "name": "External layer - Custom app: Models"
     },
     {
       "id": 19,
-      "name": "External apps layer - Custom app: Services for external connections (Email)"
+      "name": "External layer - Custom app: Services for external connections (Email)"
     },
     {
       "id": 20,
-      "name": "External apps layer - Custom app: Services"
+      "name": "External layer - Custom app: Services"
     },
     {
       "id": 21,
-      "name": "External apps layer - Custom app: Controllers"
+      "name": "External layer - Custom app: Controllers"
+    },
+    {
+      "id": 22,
+      "name": "External layer - Custom app: Properties"
+    },
+    {
+      "id": 23,
+      "name": "Database layer: Improve put calls"
+    },
+    {
+      "id": 24,
+      "name": "All layers: Small updates after review"
+    },
+    {
+      "id": 25,
+      "name": "External layer - Generic Frontend: Frontend that send an event with a string message"
+    },
+    {
+      "id": 26,
+      "name": "All layers: Update the group object so that it does not contain the appId"
+    },
+    {
+      "id": 27,
+      "name": "All layers: Update the notification object so that it contains the appId"
+    },
+    {
+      "id": 28,
+      "name": "External layer - Generic Frontend: Update the POST call to add appId for select the notification app"
     }
   ]
 }

@@ -43,7 +43,7 @@ public class GroupServiceTest {
     void testGetAll_NotEmpty() {
         // Given
         Pageable pageable = Pageable.unpaged();
-        Group group = new Group("Group Id", "AppId", "GroupName", null);
+        Group group = new Group("Group Id", "GroupName", null);
         List<Group> groupList = List.of(group);
         Page<Group> expectedPage = new PageImpl<>(groupList, pageable, groupList.size());
 
@@ -75,7 +75,7 @@ public class GroupServiceTest {
     void testGetOne_WhenGroupExists() throws DataNotFoundException {
         // Given
         String groupId = "1";
-        Group expectedGroup = new Group(groupId, "AppId", "GroupName", null);
+        Group expectedGroup = new Group(groupId, "GroupName", null);
 
         // When
         when(groupRepository.findById(groupId)).thenReturn(Optional.of(expectedGroup));
@@ -100,69 +100,38 @@ public class GroupServiceTest {
     }
 
     @Test
-    void testGetByAppId_NotEmpty() {
+    void testGetByName_NotEmpty() {
         // Given
         Pageable pageable = Pageable.unpaged();
-        String appId = "1";
-        Group group = new Group("1", appId, "GroupName", null);
+        String name = "GroupName";
+        Group group = new Group("1", name, null);
         List<Group> groupList = List.of(group);
         Page<Group> expectedPage = new PageImpl<>(groupList, pageable, groupList.size());
 
         // When
-        when(groupRepository.findByAppId(appId, pageable)).thenReturn(expectedPage);
+        when(groupRepository.findByName(name, pageable)).thenReturn(expectedPage);
 
         // Then
-        PageResponse<Group> result = groupService.getByAppId(appId, pageable);
+        PageResponse<Group> result = groupService.getByName(name, pageable);
         assertEquals(expectedPage.getContent(), result.getCollection());
-        assertEquals(appId, result.getCollection().get(0).getAppId());
+        assertEquals(name, result.getCollection().get(0).getName());
     }
 
     @Test
-    void testGetByAppId_Empty() {
+    void testGetByName_Empty() {
         // Given
         Pageable pageable = Pageable.unpaged();
-        String appId = "1";
+        String name = "1";
         List<Group> groupList = List.of();
         Page<Group> emptyPage = new PageImpl<>(groupList, pageable, groupList.size());
 
         // When
-        when(groupRepository.findByAppId(appId, pageable)).thenReturn(emptyPage);
+        when(groupRepository.findByName(name, pageable)).thenReturn(emptyPage);
 
         // Then
-        PageResponse<Group> result = groupService.getByAppId(appId, pageable);
+        PageResponse<Group> result = groupService.getByName(name, pageable);
         assertTrue(result.getCollection().isEmpty());
         assertEquals(0, result.getSize());
-    }
-
-    @Test
-    void testGetByAppIdList_NotEmpty() {
-        // Given
-        String appId = "1";
-        Group group = new Group("1", appId, "GroupName", null);
-        List<Group> groupList = List.of(group);
-
-        // When
-        when(groupRepository.findByAppId(appId)).thenReturn(groupList);
-
-        // Then
-        List<Group> result = groupService.getByAppId(appId);
-        assertEquals(groupList, result);
-        assertEquals(appId, result.get(0).getAppId());
-    }
-
-    @Test
-    void testGetByAppIdList_Empty() {
-        // Given
-        String appId = "1";
-        List<Group> groupList = List.of();
-
-        // When
-        when(groupRepository.findByAppId(appId)).thenReturn(groupList);
-
-        // Then
-        List<Group> result = groupService.getByAppId(appId);
-        assertTrue(result.isEmpty());
-        assertEquals(0, result.size());
     }
 
     @Test
@@ -171,7 +140,7 @@ public class GroupServiceTest {
         Pageable pageable = Pageable.unpaged();
         String userId = "1";
         List<String> userIds = List.of(userId);
-        Group group = new Group("1", "1", "GroupName", userIds);
+        Group group = new Group("1", "GroupName", userIds);
         List<Group> groupList = List.of(group);
         Page<Group> expectedPage = new PageImpl<>(groupList, pageable, groupList.size());
 
@@ -206,7 +175,7 @@ public class GroupServiceTest {
         // Given
         String userId = "1";
         List<String> userIds = List.of(userId);
-        Group group = new Group("1", "1", "GroupName", userIds);
+        Group group = new Group("1", "GroupName", userIds);
         List<Group> groupList = List.of(group);
 
         // When
@@ -238,7 +207,7 @@ public class GroupServiceTest {
         // Given
         String userId = "1";
         List<String> userIds = List.of(userId);
-        GroupDto validDto = new GroupDto("Appid","GroupName", userIds);
+        GroupDto validDto = new GroupDto("GroupName", userIds);
 
         // When
         when(groupRepository.save(any(Group.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -250,26 +219,11 @@ public class GroupServiceTest {
     }
 
     @Test
-    void testSave_WithEmptyAppIdDto() {
-        // Given
-        String userId = "1";
-        List<String> userIds = List.of(userId);
-        GroupDto emptyDto = new GroupDto(null, "GroupName", userIds);
-
-        // When
-
-        // Then
-        assertThrows(DataIntegrityException.class, () -> {
-            groupService.save(emptyDto);
-        });
-    }
-
-    @Test
     void testSave_WithEmptyNameDto() {
         // Given
         String userId = "1";
         List<String> userIds = List.of(userId);
-        GroupDto emptyDto = new GroupDto("AppId", null, userIds);
+        GroupDto emptyDto = new GroupDto(null, userIds);
 
         // When
 
@@ -284,7 +238,7 @@ public class GroupServiceTest {
         // Given
         String userId = "1";
         List<String> userIds = List.of(userId);
-        GroupDto emptyDto = new GroupDto("AppId", "GroupName", null);
+        GroupDto emptyDto = new GroupDto("GroupName", null);
 
         // When
 
@@ -300,7 +254,7 @@ public class GroupServiceTest {
         String id = "1";
         String userId = "1";
         List<String> userIds = List.of(userId);
-        GroupDto dto = new GroupDto("Appid","GroupName", userIds);
+        GroupDto dto = new GroupDto("GroupName", userIds);
         Optional<Group> group = Optional.of(new Group(id, dto));
 
         // When
@@ -319,7 +273,7 @@ public class GroupServiceTest {
         String id = "1";
         String userId = "1";
         List<String> userIds = List.of(userId);
-        GroupDto dto = new GroupDto("AppId", "Name", userIds);
+        GroupDto dto = new GroupDto("Name", userIds);
         Optional<Group> group = Optional.empty();
 
         // When

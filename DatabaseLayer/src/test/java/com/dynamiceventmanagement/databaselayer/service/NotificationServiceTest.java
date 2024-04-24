@@ -47,7 +47,7 @@ public class NotificationServiceTest {
         // Given
         Pageable pageable = Pageable.unpaged();
         Notification notification = new Notification("1",
-                "eventId", null, null, null, null);
+                "eventId", "appId", null, null, null, null);
         List<Notification> notificationList = List.of(notification);
         Page<Notification> expectedPage = new PageImpl<>(notificationList, pageable, notificationList.size());
 
@@ -80,7 +80,7 @@ public class NotificationServiceTest {
         // Given
         String notificationId = "1";
         Notification expectedNotification = new Notification(notificationId,
-                "EventId", null, null, null, null);
+                "EventId", "appId", null, null, null, null);
 
         // When
         when(notificationRepository.findById(notificationId)).thenReturn(Optional.of(expectedNotification));
@@ -110,7 +110,7 @@ public class NotificationServiceTest {
         Pageable pageable = Pageable.unpaged();
         String eventId = "eventId";
         Notification notification = new Notification("1",
-                eventId, null, null, null, null);
+                eventId, "appId", null, null, null, null);
         List<Notification> notificationList = List.of(notification);
         Page<Notification> expectedPage = new PageImpl<>(notificationList, pageable, notificationList.size());
 
@@ -146,6 +146,7 @@ public class NotificationServiceTest {
         User user = new User("1", "username", null);
         NotificationDto validDto = new NotificationDto(
                 "EventId",
+                "appId",
                 user,
                 user,
                 null,

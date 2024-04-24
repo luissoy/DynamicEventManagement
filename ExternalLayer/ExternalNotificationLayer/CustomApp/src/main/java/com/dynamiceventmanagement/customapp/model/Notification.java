@@ -5,19 +5,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Group {
+public class Notification {
     private String id;
+
+    private String eventId;
 
     private String appId;
 
-    private String name;
+    private User user;
 
-    private List<String> userIds;
+    private User userToNotify;
 
+    private Group group;
+
+    private Object message;
 }

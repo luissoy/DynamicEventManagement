@@ -8,13 +8,12 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface GroupRepository extends MongoRepository<Group, String> {
 
-    List<Group> findByAppId(String appId);
-
-    Page<Group> findByAppId(String appId, Pageable pageable);
+    Page<Group> findByName(String name, Pageable pageable);
 
     @Query("{'user_ids': { $in: [ ?0, '$user_ids' ] }}")
     List<Group> findGroupsByUserId(String userId);

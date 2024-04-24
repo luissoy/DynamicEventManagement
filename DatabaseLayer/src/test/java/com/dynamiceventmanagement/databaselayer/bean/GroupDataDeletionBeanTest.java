@@ -27,34 +27,14 @@ class GroupDataDeletionBeanTest {
     private GroupDataDeletionBean groupDataDeletionBean;
 
     @Test
-    void testDeleteGroupsByAppId() throws DataNotFoundException {
-        // Given
-        String appId = "AppId";
-        List<Group> groups = new ArrayList<>();
-        groups.add(new Group("1", appId, "name1", List.of("userId1")));
-        groups.add(new Group("2", appId, "name2", List.of("userId1")));
-
-        // When
-        when(groupService.getByAppId(appId)).thenReturn(groups);
-        doNothing().when(groupService).delete(any());
-
-        // Then
-        groupDataDeletionBean.deleteGroupsByAppId(appId);
-
-        verify(groupService, times(1)).getByAppId(appId);
-        verify(groupService, times(1)).delete("1");
-        verify(groupService, times(1)).delete("2");
-    }
-
-    @Test
     void testDeleteUserFromGroupsByUserId() throws DataNotFoundException, DataIntegrityException {
         // Given
         String appId = "AppId";
         String userId = "userId1";
         List<String> userIds = new ArrayList<>(List.of(userId));
         List<Group> groups = new ArrayList<>();
-        groups.add(new Group("1", appId, "name1", userIds));
-        groups.add(new Group("2", appId, "name2", userIds));
+        groups.add(new Group("1", "name1", userIds));
+        groups.add(new Group("2", "name2", userIds));
 
         // When
         when(groupService.getByUserId(userId)).thenReturn(groups);

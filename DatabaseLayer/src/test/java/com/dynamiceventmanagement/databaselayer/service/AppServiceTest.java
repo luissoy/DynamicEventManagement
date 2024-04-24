@@ -204,12 +204,10 @@ public class AppServiceTest {
 
         // When
         when(appRepository.existsById(id)).thenReturn(true);
-        doNothing().when(groupDataDeletionBean).deleteGroupsByAppId(id);
         doNothing().when(userDataDeletionBean).deleteAppParametersFromUsersByAppId(id);
 
         // Then
         appService.delete(id);
-        verify(groupDataDeletionBean, times(1)).deleteGroupsByAppId(id);
         verify(userDataDeletionBean, times(1)).deleteAppParametersFromUsersByAppId(id);
     }
 

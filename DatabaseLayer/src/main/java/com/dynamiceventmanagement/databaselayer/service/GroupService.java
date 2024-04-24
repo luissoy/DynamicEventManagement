@@ -32,12 +32,8 @@ public class GroupService {
                 );
     }
 
-    public PageResponse<Group> getByAppId(String appId, Pageable pageable) {
-        return new PageResponse<>(groupRepository.findByAppId(appId, pageable));
-    }
-
-    public List<Group> getByAppId(String appId) {
-        return groupRepository.findByAppId(appId);
+    public PageResponse<Group> getByName(String name, Pageable pageable) {
+        return new PageResponse<>(groupRepository.findByName(name, pageable));
     }
 
     public PageResponse<Group> getByUserId(String userId, Pageable pageable) {
@@ -49,52 +45,43 @@ public class GroupService {
     }
 
     public Group save(GroupDto dto) throws DataIntegrityException {
-        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getAppId(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.app-id.empty"));
-
-        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getName(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.name.empty"));
-
-        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
-                dto.getUserIds(),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.user-ids.empty"));
-
-        ServiceExceptionsUtil.noExistsOrDataIntegrity(
-                groupRepository.existsByName(dto.getName()),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.name.exists")
-        );
+        validateDtoDataIntegrity(dto);
 
         return groupRepository.save(new Group(dto));
     }
 
     public Group update(String id, GroupDto dto) throws DataNotFoundException, DataIntegrityException {
-        Group oldGroup = ServiceExceptionsUtil.
-                getObjectOrDataNotFound(
-                        groupRepository.findById(id),
-                        CustomPropertiesBean.getProperty("exception.data.not-found.group")
-                );
+        Group old = getOne(id);
 
-        ServiceExceptionsUtil.noExistsOrDataIntegrity(
-                groupRepository.existsByName(dto.getName()),
-                CustomPropertiesBean.getProperty("exception.data.integrity.group.name.exists")
+        validateDtoDataIntegrity(dto);
+
+        Group group = new Group(
+                id,
+                dto
         );
-
-        Group group = new Group(id,
-                new GroupDto(
-                        dto.getAppId() == null ? oldGroup.getAppId() : dto.getAppId(),
-                        dto.getName() == null ? oldGroup.getName() : dto.getName(),
-                        dto.getUserIds() == null ? oldGroup.getUserIds() : dto.getUserIds()
-                ));
 
         return groupRepository.save(group);
     }
 
     public void delete(String id) throws DataNotFoundException {
-        ServiceExceptionsUtil.existsOrDataNotFound(groupRepository.existsById(id));
+        ServiceExceptionsUtil.existsOrDataNotFound(
+                groupRepository.existsById(id),
+                CustomPropertiesBean.getProperty("exception.data.not-found.group")
+        );
 
         groupRepository.deleteById(id);
+    }
+
+    private void validateDtoDataIntegrity(GroupDto dto) throws DataIntegrityException {
+        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
+                dto.getName(),
+                CustomPropertiesBean.getProperty("exception.data.integrity.group.name.empty")
+        );
+
+        ServiceExceptionsUtil.notEmptyOrDataIntegrity(
+                dto.getUserIds(),
+                CustomPropertiesBean.getProperty("exception.data.integrity.group.user-ids.empty")
+        );
     }
 
 }
