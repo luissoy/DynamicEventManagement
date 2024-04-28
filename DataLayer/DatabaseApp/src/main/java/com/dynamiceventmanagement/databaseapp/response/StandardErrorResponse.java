@@ -1,4 +1,4 @@
-package com.dynamiceventmanagement.databaselayer.response;
+package com.dynamiceventmanagement.databaseapp.response;
 
 import lombok.Getter;
 import lombok.Setter;
