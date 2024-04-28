@@ -38,27 +38,27 @@
     },
     {
       "id": 10,
-      "name": "Application layer - Notification App: Models and Dtos"
+      "name": "Application layer - Event App: Models and Dtos"
     },
     {
       "id": 11,
-      "name": "Application layer - Notification App: Services for external connections"
+      "name": "Application layer - Event App: Services for external connections"
     },
     {
       "id": 12,
-      "name": "Application layer - Notification App: Services"
+      "name": "Application layer - Event App: Services"
     },
     {
       "id": 13,
-      "name": "Application layer - Notification App: Controllers"
+      "name": "Application layer - Event App: Controllers"
     },
     {
       "id": 14,
-      "name": "Application layer - Notification App: Properties"
+      "name": "Application layer - Event App: Properties"
     },
     {
       "id": 15,
-      "name": "Application layer - Notification App: Docker setup"
+      "name": "Application layer - Event App: Docker setup"
     },
     {
       "id": 16,
