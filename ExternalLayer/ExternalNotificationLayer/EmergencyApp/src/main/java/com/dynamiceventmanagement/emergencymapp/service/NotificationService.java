@@ -1,7 +1,7 @@
-package com.dynamiceventmanagement.customapp.service;
+package com.dynamiceventmanagement.emergencymapp.service;
 
-import com.dynamiceventmanagement.customapp.model.Notification;
-import com.dynamiceventmanagement.customapp.model.User;
+import com.dynamiceventmanagement.emergencymapp.model.Notification;
+import com.dynamiceventmanagement.emergencymapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

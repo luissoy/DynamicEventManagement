@@ -1,4 +1,4 @@
-package com.dynamiceventmanagement.customapp.model;
+package com.dynamiceventmanagement.emergencymapp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

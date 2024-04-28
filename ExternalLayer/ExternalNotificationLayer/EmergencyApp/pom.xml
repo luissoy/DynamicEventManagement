@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dynamic-event-management</groupId>
-	<artifactId>custom-app</artifactId>
+	<artifactId>emergency-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CustomApp</name>
-	<description>Custom App for Dynamic Event Management</description>
+	<name>EmergencyApp</name>
+	<description>Emergency App for Dynamic Event Management</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

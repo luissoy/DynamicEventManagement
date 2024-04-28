@@ -1,12 +1,12 @@
-package com.dynamiceventmanagement.customapp;
+package com.dynamiceventmanagement.emergencymapp;
 
-import com.dynamiceventmanagement.customapp.service.EmailApiService;
+import com.dynamiceventmanagement.emergencymapp.service.EmailApiService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CustomAppApplicationTests {
+class EmergencyAppApplicationTests {
 
 	@Autowired
 	EmailApiService emailApiService;

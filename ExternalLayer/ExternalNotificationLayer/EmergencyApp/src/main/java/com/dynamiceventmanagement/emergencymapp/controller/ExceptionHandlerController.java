@@ -1,6 +1,6 @@
-package com.dynamiceventmanagement.customapp.controller;
+package com.dynamiceventmanagement.emergencymapp.controller;
 
-import com.dynamiceventmanagement.customapp.response.StandardErrorResponse;
+import com.dynamiceventmanagement.emergencymapp.response.StandardErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;

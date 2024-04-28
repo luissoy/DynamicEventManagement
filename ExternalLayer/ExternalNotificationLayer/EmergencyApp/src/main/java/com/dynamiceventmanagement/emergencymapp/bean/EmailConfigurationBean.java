@@ -1,4 +1,4 @@
-package com.dynamiceventmanagement.customapp.bean;
+package com.dynamiceventmanagement.emergencymapp.bean;
 
 import org.simplejavamail.api.mailer.Mailer;
 import org.simplejavamail.api.mailer.config.TransportStrategy;

@@ -1,4 +1,4 @@
-package com.dynamiceventmanagement.customapp.service;
+package com.dynamiceventmanagement.emergencymapp.service;
 
 import org.simplejavamail.api.email.Email;
 import org.simplejavamail.api.mailer.Mailer;

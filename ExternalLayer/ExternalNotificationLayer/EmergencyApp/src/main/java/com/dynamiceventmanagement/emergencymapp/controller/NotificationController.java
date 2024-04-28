@@ -1,7 +1,7 @@
-package com.dynamiceventmanagement.customapp.controller;
+package com.dynamiceventmanagement.emergencymapp.controller;
 
-import com.dynamiceventmanagement.customapp.model.Notification;
-import com.dynamiceventmanagement.customapp.service.NotificationService;
+import com.dynamiceventmanagement.emergencymapp.model.Notification;
+import com.dynamiceventmanagement.emergencymapp.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
