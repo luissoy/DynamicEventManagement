@@ -1,0 +1,72 @@
+package com.dynamiceventmanagement.databaseapp.controller;
+
+import com.dynamiceventmanagement.databaseapp.dto.AppDto;
+import com.dynamiceventmanagement.databaseapp.exception.DataIntegrityException;
+import com.dynamiceventmanagement.databaseapp.exception.DataNotFoundException;
+import com.dynamiceventmanagement.databaseapp.service.AppService;
+import io.swagger.v3.oas.annotations.Parameter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(path = "/api/v1/apps")
+public class AppController {
+
+    @Autowired
+    private AppService appService;
+
+    @GetMapping
+    public ResponseEntity<?> getAll(
+            Pageable pageable) {
+        return ResponseEntity.status(HttpStatus.OK).
+                body(appService.getAll(pageable));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getOne(
+            @Parameter(example = "606d1b91df256d34e0a44a35")
+            @PathVariable("id") String id)
+            throws DataNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).
+                body(appService.getOne(id));
+    }
+
+    @GetMapping("names/{name}")
+    public ResponseEntity<?> getByNotificationUrl(
+            @PathVariable("name") String name)
+            throws DataNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).
+                body(appService.getByNotificationUrl(name));
+    }
+
+    @PostMapping
+    public ResponseEntity<?> save(
+            @RequestBody AppDto appDto)
+            throws DataIntegrityException {
+        return ResponseEntity.status(HttpStatus.CREATED).
+                body(appService.save(appDto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @Parameter(example = "606d1b91df256d34e0a44a35")
+            @PathVariable("id") String id,
+            @RequestBody AppDto appDto)
+            throws DataNotFoundException, DataIntegrityException {
+        return ResponseEntity.status(HttpStatus.OK).
+                body(appService.update(id, appDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(
+            @Parameter(example = "606d1b91df256d34e0a44a35")
+            @PathVariable("id") String id)
+            throws DataNotFoundException, DataIntegrityException {
+        appService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+}
