@@ -2,39 +2,39 @@
   "tasks": [
     {
       "id": 1,
-      "name": "Database layer: Database Models, Dtos and Repositories"
+      "name": "Data layer: Database Models, Dtos and Repositories"
     },
     {
       "id": 2,
-      "name": "Database layer: Docker setup"
+      "name": "Data layer: Docker setup"
     },
     {
       "id": 3,
-      "name": "Database layer: Service tests"
+      "name": "Data layer: Service tests"
     },
     {
       "id": 4,
-      "name": "Database layer: Controller tests"
+      "name": "Data layer: Controller tests"
     },
     {
       "id": 5,
-      "name": "Database layer: Integration tests"
+      "name": "Data layer: Integration tests"
     },
     {
       "id": 6,
-      "name": "Database layer: Services"
+      "name": "Data layer: Services"
     },
     {
       "id": 7,
-      "name": "Database layer: Controllers"
+      "name": "Data layer: Controllers"
     },
     {
       "id": 8,
-      "name": "Database layer: Documentation"
+      "name": "Data layer: Documentation"
     },
     {
       "id": 9,
-      "name": "Database layer: Small updates after release"
+      "name": "Data layer: Small updates after release"
     },
     {
       "id": 10,
@@ -62,7 +62,7 @@
     },
     {
       "id": 16,
-      "name": "Database layer: Improve the tests"
+      "name": "Data layer: Improve the tests"
     },
     {
       "id": 17,
@@ -90,7 +90,7 @@
     },
     {
       "id": 23,
-      "name": "Database layer: Improve put calls"
+      "name": "Data layer: Improve put calls"
     },
     {
       "id": 24,
