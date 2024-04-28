@@ -66,27 +66,27 @@
     },
     {
       "id": 17,
-      "name": "External layer - Custom app: Docker setup"
+      "name": "External layer - Notification - Emergency App: Docker setup"
     },
     {
       "id": 18,
-      "name": "External layer - Custom app: Models"
+      "name": "External layer - Notification - Emergency App: Models"
     },
     {
       "id": 19,
-      "name": "External layer - Custom app: Services for external connections (Email)"
+      "name": "External layer - Notification - Emergency App: Services for external connections (Email)"
     },
     {
       "id": 20,
-      "name": "External layer - Custom app: Services"
+      "name": "External layer - Notification - Emergency App: Services"
     },
     {
       "id": 21,
-      "name": "External layer - Custom app: Controllers"
+      "name": "External layer - Notification - Emergency App: Controllers"
     },
     {
       "id": 22,
-      "name": "External layer - Custom app: Properties"
+      "name": "External layer - Notification - Emergency App: Properties"
     },
     {
       "id": 23,
