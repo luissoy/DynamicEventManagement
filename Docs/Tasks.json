@@ -115,6 +115,14 @@
     {
       "id": 29,
       "name": "All layers: Refactor application and layer names for better understanding"
+    },
+    {
+      "id": 30,
+      "name": "External layer: Add classifier app for the notification"
+    },
+    {
+      "id": 31,
+      "name": "All layers: Refactor gitignore files"
     }
   ]
 }
