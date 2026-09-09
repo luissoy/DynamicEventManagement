@@ -2,95 +2,95 @@
   "tasks": [
     {
       "id": 1,
-      "name": "Database layer: Database Models, Dtos and Repositories"
+      "name": "Data layer: Database Models, Dtos and Repositories"
     },
     {
       "id": 2,
-      "name": "Database layer: Docker setup"
+      "name": "Data layer: Docker setup"
     },
     {
       "id": 3,
-      "name": "Database layer: Service tests"
+      "name": "Data layer: Service tests"
     },
     {
       "id": 4,
-      "name": "Database layer: Controller tests"
+      "name": "Data layer: Controller tests"
     },
     {
       "id": 5,
-      "name": "Database layer: Integration tests"
+      "name": "Data layer: Integration tests"
     },
     {
       "id": 6,
-      "name": "Database layer: Services"
+      "name": "Data layer: Services"
     },
     {
       "id": 7,
-      "name": "Database layer: Controllers"
+      "name": "Data layer: Controllers"
     },
     {
       "id": 8,
-      "name": "Database layer: Documentation"
+      "name": "Data layer: Documentation"
     },
     {
       "id": 9,
-      "name": "Database layer: Small updates after release"
+      "name": "Data layer: Small updates after release"
     },
     {
       "id": 10,
-      "name": "Application layer - Notification App: Models and Dtos"
+      "name": "Application layer - Event App: Models and Dtos"
     },
     {
       "id": 11,
-      "name": "Application layer - Notification App: Services for external connections"
+      "name": "Application layer - Event App: Services for external connections"
     },
     {
       "id": 12,
-      "name": "Application layer - Notification App: Services"
+      "name": "Application layer - Event App: Services"
     },
     {
       "id": 13,
-      "name": "Application layer - Notification App: Controllers"
+      "name": "Application layer - Event App: Controllers"
     },
     {
       "id": 14,
-      "name": "Application layer - Notification App: Properties"
+      "name": "Application layer - Event App: Properties"
     },
     {
       "id": 15,
-      "name": "Application layer - Notification App: Docker setup"
+      "name": "Application layer - Event App: Docker setup"
     },
     {
       "id": 16,
-      "name": "Database layer: Improve the tests"
+      "name": "Data layer: Improve the tests"
     },
     {
       "id": 17,
-      "name": "External layer - Custom app: Docker setup"
+      "name": "External layer - Notification - Emergency App: Docker setup"
     },
     {
       "id": 18,
-      "name": "External layer - Custom app: Models"
+      "name": "External layer - Notification - Emergency App: Models"
     },
     {
       "id": 19,
-      "name": "External layer - Custom app: Services for external connections (Email)"
+      "name": "External layer - Notification - Emergency App: Services for external connections (Email)"
     },
     {
       "id": 20,
-      "name": "External layer - Custom app: Services"
+      "name": "External layer - Notification - Emergency App: Services"
     },
     {
       "id": 21,
-      "name": "External layer - Custom app: Controllers"
+      "name": "External layer - Notification - Emergency App: Controllers"
     },
     {
       "id": 22,
-      "name": "External layer - Custom app: Properties"
+      "name": "External layer - Notification - Emergency App: Properties"
     },
     {
       "id": 23,
-      "name": "Database layer: Improve put calls"
+      "name": "Data layer: Improve put calls"
     },
     {
       "id": 24,
@@ -98,7 +98,7 @@
     },
     {
       "id": 25,
-      "name": "External layer - Generic Frontend: Frontend that send an event with a string message"
+      "name": "External layer - Event - Generic Frontend App: Frontend that send an event with a string message"
     },
     {
       "id": 26,
@@ -110,7 +110,11 @@
     },
     {
       "id": 28,
-      "name": "External layer - Generic Frontend: Update the POST call to add appId for select the notification app"
+      "name": "External layer - Event - Generic Frontend App: Update the POST call to add appId for select the notification app"
+    },
+    {
+      "id": 29,
+      "name": "All layers: Refactor application and layer names for better understanding"
     }
   ]
 }

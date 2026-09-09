@@ -1,11 +1,11 @@
 @echo off
 echo DatabaseLayer
-docker-compose -p database-layer -f DatabaseLayer/docker-compose.yml up -d
+docker-compose -p data-layer -f DataLayer/DatabaseApp/docker-compose.yml up -d
 
-echo ApplicationLayer - NotificationApp
-docker-compose -p application-layer -f ApplicationLayer/NotificationApp/docker-compose.yml up -d
+echo ApplicationLayer
+docker-compose -p application-layer -f ApplicationLayer/EventApp/docker-compose.yml up -d
 
-echo ExternalLayer - ExternalNotificationLayer
-docker-compose -p external-notification-layer -f ExternalLayer/ExternalNotificationLayer/CustomApp/docker-compose.yml up -d
+echo ExternalLayer
+docker-compose -p external-notification-layer -f ExternalLayer/ExternalNotificationLayer/EmergencyApp/docker-compose.yml up -d
 
 echo Done
