@@ -1,0 +1,7 @@
+# El modelo entrenado no se sube: pesa mas de 100 MB, que es el limite de
+# GitHub, y se regenera con Entrenamiento.py.
+modelo_gravedad.joblib
+salida_modelo/
+
+__pycache__/
+*.pyc

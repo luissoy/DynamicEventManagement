@@ -1,11 +1,28 @@
 var host = 'http://localhost:10002/api/v1/events/';
 
+function numberOrNull(id) {
+    var value = document.getElementById(id).value;
+    return value === "" ? null : Number(value);
+}
+
 function sendEvent() {
     //var userId = document.getElementById("userIdInput").value;
     //var groupId = document.getElementById("groupIdInput").value;
-    var message = document.getElementById("message").value === "" ?
-        "Please help me!" :
-        document.getElementById("message").value;
+    var now = new Date();
+
+    var message = {
+        message: document.getElementById("message").value === "" ?
+            "Please help me!" :
+            document.getElementById("message").value,
+        pulse: numberOrNull("pulse"),
+        popct: numberOrNull("popct"),
+        respr: numberOrNull("respr"),
+        tempf: numberOrNull("tempf"),
+        age: numberOrNull("age"),
+        sex: numberOrNull("sex"),
+        hora: now.getHours(),
+        vdayr: now.getDay() + 1
+    };
 
     var userId = "6623d6d2bbc2974d7aec466c";
     var groupId = "6623d70cbbc2974d7aec466e";

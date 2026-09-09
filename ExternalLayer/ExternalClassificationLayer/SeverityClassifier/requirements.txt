@@ -1,0 +1,10 @@
+# Las tres primeras van clavadas a la version con la que se entreno el modelo.
+# Si no coinciden, joblib.load avisa de version inconsistente y el bosque puede
+# dar predicciones distintas a las que aparecen en la memoria.
+scikit-learn==1.6.1
+pandas==2.2.3
+numpy==2.1.3
+
+joblib==1.4.2
+fastapi==0.115.6
+uvicorn[standard]==0.34.0

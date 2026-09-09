@@ -206,3 +206,101 @@ The Docker-compose file sets up three containers: MongoDB, MongoDB Express, and 
     - Database: `dynamic_event_management`
     - Username: `luis`
     - Password: `luissoy`
+
+## Clasificador de gravedad
+
+Microservicio que estima la gravedad de un evento a partir de ocho constantes
+vitales y devuelve una categoría junto con sus tres probabilidades.
+
+Es un módulo de la capa externa. Las dos capas internas no lo conocen y no se
+modifican para integrarlo.
+
+### Qué contiene
+
+| Fichero | Para qué sirve |
+|---|---|
+| `Entrenamiento.py` | Entrena el modelo con datos públicos de NHAMCS y genera el fichero del modelo |
+| `app.py` | El microservicio |
+| `Dockerfile` | Imagen del microservicio |
+| `docker-compose.yml` | Servicio `clasificador-gravedad`, puerto 10004 |
+| `requirements.txt` | Dependencias, con las versiones del entrenamiento |
+
+El fichero del modelo **no está en el repositorio**. Pesa más de 100 MB, que es
+el límite de GitHub, y se regenera desde el script.
+
+### Cómo se levanta
+
+Hace falta el modelo antes de construir la imagen, porque el `Dockerfile` lo
+copia dentro.
+
+```bash
+# 1. Generar el modelo. Descarga los datos del CDC y tarda unos minutos.
+python Entrenamiento.py
+ 
+# 2. Dejarlo donde el microservicio lo espera.
+cp salida_modelo/modelo_gravedad_cuatro_anos.joblib modelo_gravedad.joblib
+ 
+# 3. Levantar el servicio. La red tfg-network la crea la capa de datos,
+#    así que esa tiene que estar arriba antes.
+docker-compose -p external-classification-layer -f docker-compose.yml up -d
+```
+
+Para comprobar que ha arrancado:
+
+```bash
+curl http://localhost:10004/api/v1/gravedad/salud
+```
+
+### El endpoint
+
+`POST /api/v1/gravedad`
+
+Desde dentro de la red de Docker la dirección es
+`http://clasificador-gravedad:8000/api/v1/gravedad`. Desde fuera,
+`http://localhost:10004/api/v1/gravedad`.
+
+**Ninguno de los ocho campos es obligatorio.** El modelo lleva dentro un
+imputador que rellena los que falten con la mediana del entrenamiento, de modo
+que una petición incompleta también obtiene respuesta.
+
+| Campo | Qué es |
+|---|---|
+| `pulse` | Frecuencia cardiaca, en pulsaciones por minuto |
+| `popct` | Saturación de oxígeno, en porcentaje |
+| `respr` | Frecuencia respiratoria, en respiraciones por minuto |
+| `tempf` | Temperatura en grados Fahrenheit, con el decimal implícito. 101,3 se envía como `1013` |
+| `age` | Edad en años |
+| `sex` | 1 mujer, 2 hombre |
+| `hora` | Hora del día, de 0 a 23 |
+| `vdayr` | Día de la semana, 1 domingo a 7 sábado |
+
+Ejemplo:
+
+```bash
+curl -X POST http://localhost:10004/api/v1/gravedad \
+  -H "Content-Type: application/json" \
+  -d '{"pulse":130,"popct":91,"respr":28,"tempf":1013,"age":74,"sex":2,"hora":3,"vdayr":6}'
+```
+
+```json
+{
+  "gravedad": "ALTA",
+  "probabilidades": {"ALTA": 0.7417, "BAJA": 0.0149, "MEDIA": 0.2434}
+}
+```
+
+Un tipo que no sea numérico devuelve 422 y no llega al modelo.
+
+### El modelo
+
+Bosque aleatorio entrenado sobre NHAMCS, cuatro años y 48.047 urgencias
+reales. Las ocho variables son las que puede aportar un dispositivo de muñeca
+más el perfil y la hora, sin tensión arterial.
+
+A igual sensibilidad, gana 5,5 puntos de precisión a una regla construida
+sobre los umbrales por franja de edad del algoritmo ESI v5. Las métricas
+completas quedan en `salida_modelo/metricas_cuatro_anos.json` al entrenar.
+
+Las versiones de `requirements.txt` están clavadas a las del entrenamiento.
+Si `joblib.load` avisa de una versión inconsistente al levantar el contenedor,
+eso es lo primero que hay que mirar.

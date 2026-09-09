@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="functions.js"></script>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <title>Custom App Front</title>
-    </head>
-    <body>
-        <h1>Custom App: Emergency button</h1>
-        <div class="container">
-            <div class="box">
-                <p>This is the user you are logged in to: Luis</p>
-            </div>
-            <div class="box">
-                <p>This is the group you are sending the email to: Family</p>
-            </div>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Custom App Front</title>
+</head>
+<body>
+<h1>Custom App: Emergency button</h1>
+<div class="container">
+    <div class="box">
+        <p>This is the user you are logged in to: Luis</p>
+    </div>
+    <div class="box">
+        <p>This is the group you are sending the email to: Family</p>
+    </div>
+</div>
 
-        <div class="container">
-            <h3>More information about this emergency:</h3>
-            <div class="input-container">
-                <input type="text" id="message" placeholder="Emergency message">
-                <button onclick="sendEvent()">Send emergency email</button>
-            </div>
+<div class="container">
+    <h3>Vital signs (all optional):</h3>
+    <div class="input-container">
+        <input type="number" id="pulse" placeholder="Heart rate (bpm)">
+        <input type="number" id="popct" placeholder="Oxygen saturation (%)">
+        <input type="number" id="respr" placeholder="Respiratory rate (rpm)">
+    </div>
+    <div class="input-container">
+        <input type="number" id="tempf" placeholder="Temperature (F x10, e.g. 984)">
+        <input type="number" id="age" placeholder="Age (years)">
+        <input type="number" id="sex" placeholder="Sex (1 female, 2 male)">
+    </div>
+</div>
 
-            <div id="messagePopup" class="message-popup" style="display: none">
-                <p>Email sent.</p>
-            </div>
-        </div>
-    </body>
+<div class="container">
+    <h3>More information about this emergency:</h3>
+    <div class="input-container">
+        <input type="text" id="message" placeholder="Emergency message">
+        <button onclick="sendEvent()">Send emergency email</button>
+    </div>
+
+    <div id="messagePopup" class="message-popup" style="display: none">
+        <p>Email sent.</p>
+    </div>
+</div>
+</body>
 </html>
