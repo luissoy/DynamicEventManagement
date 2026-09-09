@@ -1,0 +1,19 @@
+version: "3"
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: clasificador-gravedad
+    ports:
+      - "10004:8000"
+    environment:
+      RUTA_MODELO: modelo_gravedad.joblib
+    networks:
+      - tfg-network
+
+networks:
+  tfg-network:
+    external:
+      name: tfg-network
