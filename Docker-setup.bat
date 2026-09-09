@@ -8,4 +8,7 @@ docker-compose -p application-layer -f ApplicationLayer/EventApp/docker-compose.
 echo ExternalLayer
 docker-compose -p external-notification-layer -f ExternalLayer/ExternalNotificationLayer/EmergencyApp/docker-compose.yml up -d
 
+echo ExternalClassificationLayer
+docker-compose -p external-classification-layer -f ExternalLayer/ExternalClassificationLayer/SeverityClassifier/docker-compose.yml up -d
+
 echo Done

@@ -3,3 +3,5 @@ docker-compose -p data-layer -f DataLayer/DatabaseApp/docker-compose.yml up -d
 docker-compose -p application-layer -f ApplicationLayer/EventApp/docker-compose.yml up -d
 
 docker-compose -p external-notification-layer -f ExternalLayer/ExternalNotificationLayer/EmergencyApp/docker-compose.yml up -d
+
+docker-compose -p external-classification-layer -f ExternalLayer/ExternalClassificationLayer/SeverityClassifier/docker-compose.yml up -d

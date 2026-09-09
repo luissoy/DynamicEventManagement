@@ -1,0 +1,561 @@
+{
+  "configuracion": "Solo 2022",
+  "anios": [
+    2022
+  ],
+  "regla_referencia": {
+    "activa": true,
+    "estratificada_por_edad": true,
+    "umbral_saturacion": 92,
+    "umbrales_por_edad": [
+      {
+        "edad_maxima": 1,
+        "pulso": 180,
+        "respiratoria": 55
+      },
+      {
+        "edad_maxima": 3,
+        "pulso": 140,
+        "respiratoria": 40
+      },
+      {
+        "edad_maxima": 5,
+        "pulso": 120,
+        "respiratoria": 35
+      },
+      {
+        "edad_maxima": 12,
+        "pulso": 120,
+        "respiratoria": 30
+      },
+      {
+        "edad_maxima": 18,
+        "pulso": 100,
+        "respiratoria": 20
+      },
+      {
+        "edad_maxima": "inf",
+        "pulso": 100,
+        "respiratoria": 20
+      }
+    ],
+    "umbrales_adulto": {
+      "pulso": 100,
+      "respiratoria": 20
+    }
+  },
+  "embudo": {
+    "registros_iniciales": 16025,
+    "con_nivel_de_triaje": 10207,
+    "conjunto_final": 10147
+  },
+  "ausentes_pct": {
+    "PULSE": 1.44,
+    "POPCT": 1.57,
+    "RESPR": 1.76,
+    "TEMPF": 2.36,
+    "AGE": 0.0,
+    "SEX": 0.0,
+    "HORA": 0.8,
+    "VDAYR": 0.0
+  },
+  "distribucion_5_niveles": {
+    "1": 132,
+    "2": 1585,
+    "3": 5314,
+    "4": 2812,
+    "5": 304
+  },
+  "distribucion_3_categorias": {
+    "ALTA": 1717,
+    "MEDIA": 5314,
+    "BAJA": 3116
+  },
+  "clase_mayoritaria_pct": 52.37,
+  "comparacion_modelos": [
+    {
+      "Modelo": "Trivial (clase mayoritaria)",
+      "Exactitud": 0.5238,
+      "Sensib. ALTA": 0.0,
+      "Precis. ALTA": 0.0,
+      "AUC ALTA": 0.5
+    },
+    {
+      "Modelo": "Regresion logistica",
+      "Exactitud": 0.3941,
+      "Sensib. ALTA": 0.5282,
+      "Precis. ALTA": 0.2669,
+      "AUC ALTA": 0.6554
+    },
+    {
+      "Modelo": "Bosque aleatorio",
+      "Exactitud": 0.5034,
+      "Sensib. ALTA": 0.301,
+      "Precis. ALTA": 0.3605,
+      "AUC ALTA": 0.6694
+    },
+    {
+      "Modelo": "Arbol potenciado por gradiente",
+      "Exactitud": 0.5297,
+      "Sensib. ALTA": 0.1767,
+      "Precis. ALTA": 0.4789,
+      "AUC ALTA": 0.6552
+    },
+    {
+      "Modelo": "Regla sobre constantes (referencia)",
+      "Exactitud": 0.4594,
+      "Sensib. ALTA": 0.4291,
+      "Precis. ALTA": 0.2666,
+      "AUC ALTA": null
+    }
+  ],
+  "comparacion_familias": [
+    {
+      "modelo": "Trivial",
+      "familia": "Referencia",
+      "auc": 0.5,
+      "ic_bajo": 0.5,
+      "ic_alto": 0.5,
+      "bal_acc": 0.5
+    },
+    {
+      "modelo": "Regresion logistica",
+      "familia": "Lineal",
+      "auc": 0.6154,
+      "ic_bajo": 0.5899,
+      "ic_alto": 0.6427,
+      "bal_acc": 0.5964
+    },
+    {
+      "modelo": "Bosque aleatorio",
+      "familia": "Agregacion",
+      "auc": 0.6552,
+      "ic_bajo": 0.6325,
+      "ic_alto": 0.6855,
+      "bal_acc": 0.6108
+    },
+    {
+      "modelo": "Arboles extra aleatorios",
+      "familia": "Agregacion",
+      "auc": 0.6246,
+      "ic_bajo": 0.6019,
+      "ic_alto": 0.653,
+      "bal_acc": 0.5936
+    },
+    {
+      "modelo": "Gradiente por histograma",
+      "familia": "Refuerzo",
+      "auc": 0.6281,
+      "ic_bajo": 0.6026,
+      "ic_alto": 0.6575,
+      "bal_acc": 0.592
+    },
+    {
+      "modelo": "Red neuronal (perceptron)",
+      "familia": "Red neuronal",
+      "auc": 0.5184,
+      "ic_bajo": 0.4878,
+      "ic_alto": 0.548,
+      "bal_acc": 0.5394
+    },
+    {
+      "modelo": "XGBoost",
+      "familia": "Refuerzo",
+      "auc": 0.6247,
+      "ic_bajo": 0.6019,
+      "ic_alto": 0.6549,
+      "bal_acc": 0.5985
+    },
+    {
+      "modelo": "LightGBM",
+      "familia": "Refuerzo",
+      "auc": 0.6142,
+      "ic_bajo": 0.5883,
+      "ic_alto": 0.645,
+      "bal_acc": 0.5814
+    },
+    {
+      "modelo": "Regla sobre constantes",
+      "familia": "Referencia",
+      "auc": null,
+      "ic_bajo": null,
+      "ic_alto": null,
+      "bal_acc": 0.5797
+    }
+  ],
+  "techo_informacion": {
+    "rango_auc": 0.1368,
+    "mejor": "Bosque aleatorio",
+    "auc_mejor": 0.6552
+  },
+  "gravedad_errores": {
+    "error_dos_niveles_pct": 5.29,
+    "acierto_un_nivel_pct": 94.71,
+    "alta_como_baja": 111,
+    "alta_como_baja_pct": 21.55
+  },
+  "matriz_confusion": {
+    "orden": [
+      "ALTA",
+      "MEDIA",
+      "BAJA"
+    ],
+    "valores": [
+      [
+        155,
+        249,
+        111
+      ],
+      [
+        225,
+        896,
+        474
+      ],
+      [
+        50,
+        403,
+        482
+      ]
+    ]
+  },
+  "informe": {
+    "ALTA": {
+      "precision": 0.36046511627906974,
+      "recall": 0.30097087378640774,
+      "f1-score": 0.328042328042328,
+      "support": 515.0
+    },
+    "MEDIA": {
+      "precision": 0.5788113695090439,
+      "recall": 0.561755485893417,
+      "f1-score": 0.5701559020044543,
+      "support": 1595.0
+    },
+    "BAJA": {
+      "precision": 0.45173383317713217,
+      "recall": 0.5155080213903743,
+      "f1-score": 0.48151848151848153,
+      "support": 935.0
+    },
+    "accuracy": 0.503448275862069,
+    "macro avg": {
+      "precision": 0.4636701063217486,
+      "recall": 0.45941146035673297,
+      "f1-score": 0.45990557052175457,
+      "support": 3045.0
+    },
+    "weighted avg": {
+      "precision": 0.5028620043583791,
+      "recall": 0.503448275862069,
+      "f1-score": 0.5019902275397976,
+      "support": 3045.0
+    }
+  },
+  "importancia_variables": {
+    "AGE": 0.2478,
+    "PULSE": 0.1839,
+    "TEMPF": 0.1322,
+    "HORA": 0.1287,
+    "RESPR": 0.1043,
+    "POPCT": 0.0956,
+    "VDAYR": 0.0845,
+    "SEX": 0.0229
+  },
+  "auc_intervalo": {
+    "auc": 0.6811,
+    "ic_bajo": 0.6546,
+    "ic_alto": 0.7078
+  },
+  "concentracion_riesgo": [
+    {
+      "fraccion_revisada": 0.1,
+      "tasa_en_el_grupo": 0.4309,
+      "tasa_base": 0.1691,
+      "concentracion": 2.55,
+      "graves_capturados": 0.2544
+    },
+    {
+      "fraccion_revisada": 0.2,
+      "tasa_en_el_grupo": 0.3268,
+      "tasa_base": 0.1691,
+      "concentracion": 1.93,
+      "graves_capturados": 0.3864
+    },
+    {
+      "fraccion_revisada": 0.3,
+      "tasa_en_el_grupo": 0.2771,
+      "tasa_base": 0.1691,
+      "concentracion": 1.64,
+      "graves_capturados": 0.4913
+    },
+    {
+      "fraccion_revisada": 0.5,
+      "tasa_en_el_grupo": 0.2339,
+      "tasa_base": 0.1691,
+      "concentracion": 1.38,
+      "graves_capturados": 0.6913
+    }
+  ],
+  "reparto_franjas": {
+    "franjas": [
+      {
+        "franja": "0 anos",
+        "pulso": 180,
+        "respiratoria": 55,
+        "n": 70
+      },
+      {
+        "franja": "1-2 anos",
+        "pulso": 140,
+        "respiratoria": 40,
+        "n": 115
+      },
+      {
+        "franja": "3-4 anos",
+        "pulso": 120,
+        "respiratoria": 35,
+        "n": 73
+      },
+      {
+        "franja": "5-11 anos",
+        "pulso": 120,
+        "respiratoria": 30,
+        "n": 191
+      },
+      {
+        "franja": "12-17 anos",
+        "pulso": 100,
+        "respiratoria": 20,
+        "n": 200
+      },
+      {
+        "franja": "18 anos o mas",
+        "pulso": 100,
+        "respiratoria": 20,
+        "n": 2396
+      }
+    ],
+    "sin_edad": 0,
+    "no_adultos": 649,
+    "n_prueba": 3045
+  },
+  "comparacion_pareada": {
+    "sin_estratificar": {
+      "regla": {
+        "sensibilidad": 0.4563,
+        "precision": 0.2182,
+        "especificidad": 0.6672,
+        "fraccion_marcada": 0.3537
+      },
+      "modelo_mismo_punto": {
+        "umbral": 0.4774,
+        "sensibilidad": 0.4563,
+        "especificidad": 0.7747,
+        "precision": 0.2919,
+        "exactitud": 0.7209,
+        "fraccion_marcada": 0.2644,
+        "verdaderos_positivos": 235,
+        "falsos_positivos": 570,
+        "falsos_negativos": 280,
+        "verdaderos_negativos": 1960
+      },
+      "ganancia_puntos": 7.4
+    },
+    "estratificada": {
+      "regla": {
+        "sensibilidad": 0.4291,
+        "precision": 0.2666,
+        "especificidad": 0.7597,
+        "fraccion_marcada": 0.2722
+      },
+      "modelo_mismo_punto": {
+        "umbral": 0.4924,
+        "sensibilidad": 0.4291,
+        "especificidad": 0.8008,
+        "precision": 0.3048,
+        "exactitud": 0.7379,
+        "fraccion_marcada": 0.2381,
+        "verdaderos_positivos": 221,
+        "falsos_positivos": 504,
+        "falsos_negativos": 294,
+        "verdaderos_negativos": 2026
+      },
+      "ganancia_puntos": 3.8
+    },
+    "regla": {
+      "sensibilidad": 0.4291,
+      "precision": 0.2666,
+      "especificidad": 0.7597,
+      "fraccion_marcada": 0.2722
+    },
+    "modelo_mismo_punto": {
+      "umbral": 0.4924,
+      "sensibilidad": 0.4291,
+      "especificidad": 0.8008,
+      "precision": 0.3048,
+      "exactitud": 0.7379,
+      "fraccion_marcada": 0.2381,
+      "verdaderos_positivos": 221,
+      "falsos_positivos": 504,
+      "falsos_negativos": 294,
+      "verdaderos_negativos": 2026
+    }
+  },
+  "frontera_critica": {
+    "prevalencia_ALTA": 0.1691,
+    "clase_mayoritaria_binaria": 0.8309,
+    "auc": 0.6811,
+    "mejores_hiperparametros": {
+      "clf__max_features": "0.5",
+      "clf__min_samples_leaf": "20",
+      "clf__n_estimators": "600"
+    },
+    "puntos_de_operacion": {
+      "sens_50": {
+        "umbral": 0.4563,
+        "sensibilidad": 0.501,
+        "especificidad": 0.7312,
+        "precision": 0.2751,
+        "exactitud": 0.6923,
+        "fraccion_marcada": 0.308,
+        "verdaderos_positivos": 258,
+        "falsos_positivos": 680,
+        "falsos_negativos": 257,
+        "verdaderos_negativos": 1850
+      },
+      "sens_60": {
+        "umbral": 0.409,
+        "sensibilidad": 0.6,
+        "especificidad": 0.6285,
+        "precision": 0.2474,
+        "exactitud": 0.6236,
+        "fraccion_marcada": 0.4102,
+        "verdaderos_positivos": 309,
+        "falsos_positivos": 940,
+        "falsos_negativos": 206,
+        "verdaderos_negativos": 1590
+      },
+      "sens_70": {
+        "umbral": 0.3687,
+        "sensibilidad": 0.701,
+        "especificidad": 0.5308,
+        "precision": 0.2332,
+        "exactitud": 0.5596,
+        "fraccion_marcada": 0.5084,
+        "verdaderos_positivos": 361,
+        "falsos_positivos": 1187,
+        "falsos_negativos": 154,
+        "verdaderos_negativos": 1343
+      },
+      "sens_75": {
+        "umbral": 0.3529,
+        "sensibilidad": 0.7515,
+        "especificidad": 0.4937,
+        "precision": 0.232,
+        "exactitud": 0.5373,
+        "fraccion_marcada": 0.5478,
+        "verdaderos_positivos": 387,
+        "falsos_positivos": 1281,
+        "falsos_negativos": 128,
+        "verdaderos_negativos": 1249
+      },
+      "sens_80": {
+        "umbral": 0.3333,
+        "sensibilidad": 0.8,
+        "especificidad": 0.436,
+        "precision": 0.224,
+        "exactitud": 0.4975,
+        "fraccion_marcada": 0.6039,
+        "verdaderos_positivos": 412,
+        "falsos_positivos": 1427,
+        "falsos_negativos": 103,
+        "verdaderos_negativos": 1103
+      },
+      "sens_90": {
+        "umbral": 0.2779,
+        "sensibilidad": 0.901,
+        "especificidad": 0.2704,
+        "precision": 0.2009,
+        "exactitud": 0.377,
+        "fraccion_marcada": 0.7586,
+        "verdaderos_positivos": 464,
+        "falsos_positivos": 1846,
+        "falsos_negativos": 51,
+        "verdaderos_negativos": 684
+      }
+    }
+  },
+  "comparacion_cortes": [
+    {
+      "prevalencia": 0.0131,
+      "trivial": 0.9869,
+      "auc": 0.6965,
+      "bal_acc": 0.6473,
+      "sensibilidad": 0.475,
+      "especificidad": 0.8196,
+      "precision": 0.0339,
+      "exactitud": 0.8151,
+      "corte": "1 | 2345",
+      "ganancia_sobre_trivial": -0.1718
+    },
+    {
+      "prevalencia": 0.1691,
+      "trivial": 0.8309,
+      "auc": 0.6552,
+      "bal_acc": 0.6108,
+      "sensibilidad": 0.565,
+      "especificidad": 0.6565,
+      "precision": 0.2509,
+      "exactitud": 0.6411,
+      "corte": "12 | 345",
+      "ganancia_sobre_trivial": -0.1898
+    },
+    {
+      "prevalencia": 0.6929,
+      "trivial": 0.6929,
+      "auc": 0.6849,
+      "bal_acc": 0.639,
+      "sensibilidad": 0.6673,
+      "especificidad": 0.6107,
+      "precision": 0.7946,
+      "exactitud": 0.6499,
+      "corte": "123 | 45",
+      "ganancia_sobre_trivial": -0.043
+    },
+    {
+      "prevalencia": 0.9701,
+      "trivial": 0.9701,
+      "auc": 0.6097,
+      "bal_acc": 0.5928,
+      "sensibilidad": 0.4164,
+      "especificidad": 0.7692,
+      "precision": 0.9832,
+      "exactitud": 0.4269,
+      "corte": "1234 | 5",
+      "ganancia_sobre_trivial": -0.5432
+    }
+  ],
+  "ablacion_tension": {
+    "sin": {
+      "prevalencia": 0.1691,
+      "trivial": 0.8309,
+      "auc": 0.6552,
+      "bal_acc": 0.6108,
+      "sensibilidad": 0.565,
+      "especificidad": 0.6565,
+      "precision": 0.2509,
+      "exactitud": 0.6411
+    },
+    "con": {
+      "prevalencia": 0.1691,
+      "trivial": 0.8309,
+      "auc": 0.6597,
+      "bal_acc": 0.6257,
+      "sensibilidad": 0.5573,
+      "especificidad": 0.6941,
+      "precision": 0.2705,
+      "exactitud": 0.6709
+    },
+    "coste_auc": 0.0045
+  }
+}

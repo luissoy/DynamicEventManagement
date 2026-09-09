@@ -12,6 +12,7 @@ services:
     environment:
       API_MAIL_HOST: smtp4dev
       API_MAIL_PORT: 25
+      API_GRAVITY_URL: http://clasificador-gravedad:8000/api/v1/gravedad
     depends_on:
       - smtp4dev
     networks:
